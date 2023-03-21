@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 public class Stopwatch
 {
-    private int second = 0;
+    private int second = -1;
     private boolean isRunning = false;
     private java.util.Timer timer;
 
