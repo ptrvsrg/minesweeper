@@ -12,7 +12,8 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import ru.nsu.ccfit.petrov.minesweeper.model.ScoreRating;
+import ru.nsu.ccfit.petrov.minesweeper.model.score.Score;
+import ru.nsu.ccfit.petrov.minesweeper.model.score.ScoreRating;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.BackgroundPanel;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.MenuButton;
 
@@ -102,7 +103,7 @@ public class FinishMenu
                 String playerName = JOptionPane.showInputDialog(FinishMenu.this,
                                                                 PLAYER_NAME_TEXT, SAVE_SCORE_TEXT,
                                                                 JOptionPane.INFORMATION_MESSAGE);
-                ScoreRating.saveScore(playerName, time);
+                ScoreRating.saveScore(new Score(playerName, time));
             }
         });
         return saveScoreButton;

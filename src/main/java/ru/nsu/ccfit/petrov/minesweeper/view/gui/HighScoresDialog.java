@@ -1,8 +1,7 @@
 package ru.nsu.ccfit.petrov.minesweeper.view.gui;
 
 import java.awt.Font;
-import java.util.Map.Entry;
-import java.util.SortedMap;
+import java.util.SortedSet;
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -10,7 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import ru.nsu.ccfit.petrov.minesweeper.model.ScoreRating;
+import ru.nsu.ccfit.petrov.minesweeper.model.score.Score;
+import ru.nsu.ccfit.petrov.minesweeper.model.score.ScoreRating;
 import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
 
 public class HighScoresDialog
@@ -28,10 +28,10 @@ public class HighScoresDialog
         textArea.setLayout(new BoxLayout(textArea, BoxLayout.Y_AXIS));
         textArea.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        SortedMap<Integer, String> scores = ScoreRating.getScores();
-        for (Entry<Integer, String> score : scores.entrySet()) {
+        SortedSet<Score> scores = ScoreRating.getScores();
+        for (Score score : scores) {
             JLabel scoreLine = new JLabel(
-                score.getValue() + " - " + Stopwatch.timeToString(score.getKey()) + "\n");
+                score.getUserName() + " - " + Stopwatch.timeToString(score.getTime()) + "\n");
             scoreLine.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
             textArea.add(scoreLine);
         }
