@@ -4,53 +4,66 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class Field
-{
+public class Field {
+
+    private final int height;
+    private final int width;
     private final int mineCount;
-    private final StatusCell[][] statusCells;
-    private final boolean[][] mineCells;
+    private final CellView[][] cellViewMatrix;
+    private final byte[][] mineMatrix;  // -1 is mine
+    // another number is the number of mines around
 
-    public Field() {
-        this.mineCount = 10;
-        this.statusCells = new StatusCell[9][9];
-        this.mineCells = new boolean[9][9];
+    public Field(int height, int width, int mineCount) {
+        if (height < 0 || width < 0) {
+            throw new IllegalArgumentException("Incorrect size");
+        }
+        if (mineCount < 0) {
+            throw new IllegalArgumentException("Incorrect mine count");
+        }
+
+        this.height = height;
+        this.width = width;
+        this.mineCount = Math.min(mineCount, height * width);
+        this.cellViewMatrix = new CellView[height][width];
+        this.mineMatrix = new byte[height][width];
 
         initCells();
         placeMines();
     }
 
-    public Field(int width, int height, int mineCount) {
-        if (width <= 0 || height <= 0) {
-            throw new IllegalArgumentException("Incorrect field sizes");
-        }
-        if (mineCount > width * height) {
-            throw new IllegalArgumentException("More mines than cells");
-        }
-
-        this.mineCount = mineCount;
-        this.statusCells = new StatusCell[height][width];
-        this.mineCells = new boolean[height][width];
-
-        initCells();
-        placeMines();
-    }
-    
     private void initCells() {
-        for (int i = 0; i < getHeight(); ++i) {
-            for (int j = 0; j < getWidth(); ++j) {
-                statusCells[i][j] = StatusCell.CLOSED;
-                mineCells[i][j] = false;
+        for (int i = 0; i < height; ++i) {
+            for (int j = 0; j < width; ++j) {
+                cellViewMatrix[i][j] = CellView.CLOSED;
+                mineMatrix[i][j] = 0;
             }
         }
     }
 
     private void placeMines() {
-        Set<Integer> mineCoordinates = generateUniqueRandomNumbers(mineCount, getWidth() * getHeight());
+        Set<Integer> mineCoordinates = generateUniqueRandomNumbers(mineCount, width * height);
 
         for (Integer coordinate : mineCoordinates) {
-            int x = coordinate % getWidth();
-            int y = coordinate / getWidth();
-            mineCells[y][x] = true;
+            int x = coordinate % width;
+            int y = coordinate / width;
+            placeMine(y, x);
+        }
+    }
+
+    private void placeMine(int y, int x) {
+        mineMatrix[y][x] = -1;
+
+        for (int i = -1; i <= 1; ++i) {
+            for (int j = -1; j <= 1; ++j) {
+                if (y + i >= 0 && y + i < height && x + j >= 0 && x + j < width
+                    && mineMatrix[y + i][x + j] != -1) {
+                    if (i == 0 && j == 0) {
+                        continue;
+                    }
+
+                    ++mineMatrix[y + i][x + j];
+                }
+            }
         }
     }
 
@@ -72,19 +85,43 @@ public class Field
     }
 
     public int getHeight() {
-        return statusCells.length;
+        return height;
     }
 
     public int getWidth() {
-        return statusCells[0].length;
+        return width;
     }
 
-    public void mark(int x, int y) {
-        statusCells[y][x] = StatusCell.MARKED;
+    public int getMineCount() {
+        return mineCount;
     }
 
-    public boolean open(int x, int y) {
-        statusCells[y][x] = StatusCell.OPENED;
-        return mineCells[y][x];
+    private void checkCoordinates(int y, int x) {
+        if (y < 0 || y >= height || x < 0 || x >= width) {
+            throw new IllegalArgumentException("Incorrect coordinates");
+        }
+    }
+
+    public CellView getCellView(int y, int x) {
+        checkCoordinates(y, x);
+        return cellViewMatrix[y][x];
+    }
+
+    public byte getMineCountAround(int y, int x) {
+        checkCoordinates(y, x);
+        return mineMatrix[y][x];
+    }
+
+    public void setCellView(int y, int x, CellView cellView) {
+        checkCoordinates(y, x);
+        cellViewMatrix[y][x] = cellView;
+    }
+
+    public boolean isMine(int y, int x) {
+        return getMineCountAround(y, x) == -1;
+    }
+
+    public boolean areThereMinesAround(int y, int x) {
+        return getMineCountAround(y, x) > 0;
     }
 }
