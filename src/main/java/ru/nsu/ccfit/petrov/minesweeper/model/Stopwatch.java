@@ -41,10 +41,6 @@ public class Stopwatch
         timer.purge();
     }
 
-    public void clear() {
-        second = 0;
-    }
-
     public int getSecond() {
         return second;
     }
