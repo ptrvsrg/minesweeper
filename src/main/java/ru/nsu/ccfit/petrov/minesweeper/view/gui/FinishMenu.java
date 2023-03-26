@@ -1,6 +1,5 @@
 package ru.nsu.ccfit.petrov.minesweeper.view.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -53,7 +52,7 @@ public class FinishMenu
         JPanel buttonArea = new JPanel();
         buttonArea.setPreferredSize(new Dimension(getWidth() / 2, getHeight() / 2));
         buttonArea.setLayout(new GridLayout(3, 1));
-        buttonArea.setBackground(new Color(0, 0, 0, 0));
+        buttonArea.setBackground(Utils.getTransparentColor());
         buttonArea.add(createNewGameButton());
         buttonArea.add(createHighScoresButton());
 
