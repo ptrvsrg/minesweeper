@@ -21,15 +21,19 @@ public class Main {
             uiMode = "GUI";
         }
 
-        switch (uiMode) {
-            case "GUI":
-                new ru.nsu.ccfit.petrov.minesweeper.view.gui.StartMenu();
-                break;
-            case "Text":
-                new ru.nsu.ccfit.petrov.minesweeper.view.text.StartMenu();
-                break;
-            default:
-                throw new IllegalArgumentException("No such UI mode found\n");
+        try {
+            switch (uiMode) {
+                case "GUI":
+                    new ru.nsu.ccfit.petrov.minesweeper.view.gui.StartMenu();
+                    break;
+                case "Text":
+                    new ru.nsu.ccfit.petrov.minesweeper.view.text.StartMenu();
+                    break;
+                default:
+                    throw new IllegalArgumentException("No such UI mode found\n");
+            }
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
 }
