@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.petrov.minesweeper.model;
 
+import java.util.Timer;
 import java.util.TimerTask;
 
 
@@ -7,7 +8,7 @@ public class Stopwatch
 {
     private int second = -1;
     private boolean isRunning = false;
-    private java.util.Timer timer;
+    private Timer timer;
 
     private class StopwatchTask
         extends TimerTask {
