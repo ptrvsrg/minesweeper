@@ -209,6 +209,7 @@ public class GameSpace
                 break;
             case Stopwatch.STOPWATCH_PROPERTY:
                 stopwatchCounter.setText(Stopwatch.timeToString((Integer)evt.getNewValue()));
+                break;
             default:
                 throw new IllegalArgumentException("Unexpected property change");
         }
