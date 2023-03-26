@@ -45,11 +45,7 @@ public class ScoreRating {
         }
     }
 
-    public static void saveScore(String userName, int time) {
-        if (time < 0) {
-            throw new IllegalArgumentException("Time is negative");
-        }
-
+    public static void saveScore(Score score) {
         File scoreFile = new File(getScoreFile());
         if (!scoreFile.exists()) {
             try {
