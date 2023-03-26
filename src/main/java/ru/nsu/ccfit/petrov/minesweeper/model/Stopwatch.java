@@ -42,7 +42,7 @@ public class Stopwatch
     }
 
     public int getSecond() {
-        return second;
+        return Math.max(second, 0);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
