@@ -18,7 +18,7 @@ import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.MenuButton;
 import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
 /**
- * The type {@code FinishMenu} is class that describe the finish menu.
+ * The type {@code FinishMenu} is class that describe the finish menu in GUI mode.
  *
  * @author ptrvsrg
  */
