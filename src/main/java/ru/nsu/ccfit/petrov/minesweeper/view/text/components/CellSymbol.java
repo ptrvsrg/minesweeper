@@ -3,6 +3,11 @@ package ru.nsu.ccfit.petrov.minesweeper.view.text.components;
 import java.util.HashMap;
 import lombok.Getter;
 
+/**
+ * The type {@code CellSymbol} is class that matches a field cell and a print character.
+ *
+ * @author ptrvsrg
+ */
 @Getter
 public class CellSymbol {
     private static final HashMap<Byte, Character> CELL_SYMBOLS = new HashMap<>();
@@ -23,10 +28,16 @@ public class CellSymbol {
         CELL_SYMBOLS.put((byte) 8, '8');
     }
 
+    /**
+     * Instantiates a new CellSymbol.
+     */
     public CellSymbol() {
         this.symbol = CLOSED_CELL_SYMBOL;
     }
 
+    /**
+     * Mark cell.
+     */
     public void mark() {
         if (symbol == CLOSED_CELL_SYMBOL) {
             symbol = FLAG_SYMBOL;
@@ -35,6 +46,11 @@ public class CellSymbol {
         }
     }
 
+    /**
+     * Open cell.
+     *
+     * @param mineAroundCount the mine around count
+     */
     public void open(byte mineAroundCount) {
         symbol = CELL_SYMBOLS.get(mineAroundCount);
     }
