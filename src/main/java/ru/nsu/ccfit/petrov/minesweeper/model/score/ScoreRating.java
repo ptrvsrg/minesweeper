@@ -28,31 +28,36 @@ public class ScoreRating {
             return Collections.emptySortedSet();
         }
 
+        List<String[]> readScores;
         try (CSVReader csvReader = new CSVReader(new FileReader(scoreFile))) {
-            List<String[]> readScores = csvReader.readAll();
-
-            Comparator<Score> comparator = (o1, o2) -> {
-                if (o1.getTime() == o2.getTime()) {
-                    return o1.getUserName().compareTo(o2.getUserName());
-                }
-
-                return Integer.compare(o2.getTime(), o1.getTime());
-            };
-
-            TreeSet<Score> processedScores = new TreeSet<>(comparator);
-
-            for (String[] score : readScores) {
-                if (score.length != 2) {
-                    throw new IllegalArgumentException("Incorrect file format");
-                }
-
-                processedScores.add(new Score(score[0], Integer.parseInt(score[1])));
-            }
-
-            return processedScores;
+            readScores = csvReader.readAll();
         } catch (IOException | CsvException e) {
             throw new RuntimeException(e);
         }
+
+        Comparator<Score> comparator = (o1, o2) -> {
+            if (o1.getTime() == o2.getTime()) {
+                return o1.getUserName().compareTo(o2.getUserName());
+            }
+
+            return Integer.compare(o1.getTime(), o2.getTime());
+        };
+
+        TreeSet<Score> processedScores = new TreeSet<>(comparator);
+
+        for (String[] score : readScores) {
+            if (score.length != 2) {
+                throw new IllegalArgumentException("Incorrect file format");
+            }
+
+            try {
+                processedScores.add(new Score(score[0], Integer.parseInt(score[1])));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Incorrect file format");
+            }
+        }
+
+        return processedScores;
     }
 
     public static void saveScore(Score score) {
