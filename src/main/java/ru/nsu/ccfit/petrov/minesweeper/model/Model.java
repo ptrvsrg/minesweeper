@@ -5,6 +5,11 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import lombok.Getter;
 
+/**
+ * The type {@code Model} is class for description game logic.
+ *
+ * @author ptrvsrg
+ */
 public class Model {
     private final Field field;
     @Getter
@@ -12,11 +17,29 @@ public class Model {
     private int openedCellCount = 0;
     private boolean isGameOver = false;
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+    /**
+     * The constant MARKED_CELL_VIEW_PROPERTY is constant for {@link PropertyChangeListener}.
+     */
     public static final String MARKED_CELL_VIEW_PROPERTY = "markedCellViewProperty";
+    /**
+     * The constant OPENED_CELL_VIEW_PROPERTY is constant for {@link PropertyChangeListener}.
+     */
     public static final String OPENED_CELL_VIEW_PROPERTY = "openedCellViewProperty";
+    /**
+     * The constant MARKED_CELL_COUNT_PROPERTY is constant for {@link PropertyChangeListener}.
+     */
     public static final String MARKED_CELL_COUNT_PROPERTY = "markedCellCountProperty";
+    /**
+     * The constant IS_WINNER_PROPERTY is constant for {@link PropertyChangeListener}.
+     */
     public static final String IS_WINNER_PROPERTY = "isWinnerProperty";
 
+    /**
+     * Instantiates a new Model.
+     *
+     * @param level the level
+     * @throws IllegalArgumentException if level does not belong to {@link ru.nsu.ccfit.petrov.minesweeper.model.Level Level}
+     */
     public Model(Level level) {
         switch (level) {
             case BEGINNER:
@@ -33,23 +56,50 @@ public class Model {
         }
     }
 
+    /**
+     * Gets field height.
+     *
+     * @return the field height
+     */
     public int getHeight() {
         return field.getHeight();
     }
 
+    /**
+     * Gets field width.
+     *
+     * @return the field width
+     */
     public int getWidth() {
         return field.getWidth();
     }
 
+    /**
+     * Gets mine count in field.
+     *
+     * @return the mine count
+     */
     public int getMineCount() {
         return field.getMineCount();
     }
 
-
+    /**
+     * Gets mine count around cell with coordinates (x, y).
+     *
+     * @param y the y coordinate
+     * @param x the x coordinate
+     * @return the mine count around cell with coordinates (x, y)
+     */
     public byte getMineCountAround(int y, int x) {
         return field.getMineCountAround(y, x);
     }
 
+    /**
+     * Mark cell with coordinates (x, y). Also notifies listeners when model fields change.
+     *
+     * @param y the y coordinate
+     * @param x the x coordinate
+     */
     public void markCell(int y, int x) {
         CellView oldCellView = field.getCellView(y, x);
         int oldMarkedCellCount = markedCellCount;
@@ -70,6 +120,12 @@ public class Model {
         }
     }
 
+    /**
+     * Open cell with coordinates (x, y). Also notifies listeners when model fields change.
+     *
+     * @param y the y coordinate
+     * @param x the x coordinate
+     */
     public void openCell(int y, int x) {
         CellView oldCellView = field.getCellView(y, x);
         if (oldCellView == CellView.CLOSED) {
@@ -123,6 +179,11 @@ public class Model {
         }
     }
 
+    /**
+     * Add property change listener.
+     *
+     * @param listener the property change listener
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
