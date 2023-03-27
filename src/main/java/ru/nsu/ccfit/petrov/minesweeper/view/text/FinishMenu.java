@@ -102,7 +102,7 @@ public class FinishMenu {
         System.out.printf("| %20s | %20s |%n", "PLAYER NAME", "TIME");
 
         for (Score score : scores) {
-            System.out.printf("| %20s | %20s |%n", score.getUserName(),
+            System.out.printf("| %20s | %20s |%n", score.getPlayerName(),
                               Stopwatch.timeToString(score.getTime()));
         }
     }
