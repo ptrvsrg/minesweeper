@@ -92,7 +92,11 @@ public class FinishMenu
         buttonArea.setBackground(Utils.getTransparentColor());
         buttonArea.add(createNewGameButton());
         buttonArea.add(createHighScoresButton());
-        buttonArea.add(createSaveScoreButton());
+
+        if (playerStatus != PlayerStatus.LOSER){
+            buttonArea.add(createSaveScoreButton());
+        }
+
         buttonArea.add(createAboutButton());
 
         return buttonArea;
