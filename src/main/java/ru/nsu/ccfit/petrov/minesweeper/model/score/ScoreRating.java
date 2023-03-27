@@ -53,12 +53,10 @@ public class ScoreRating {
 
     public static void saveScore(Score score) {
         File scoreFile = new File(getScoreFile());
-        if (!scoreFile.exists()) {
-            try {
-                scoreFile.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            scoreFile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(scoreFile, true))) {
