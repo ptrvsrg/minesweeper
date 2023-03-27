@@ -7,6 +7,11 @@ import ru.nsu.ccfit.petrov.minesweeper.model.score.Score;
 import ru.nsu.ccfit.petrov.minesweeper.model.score.ScoreRating;
 import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
+/**
+ * The type {@code FinishMenu} is class that describe the finish menu in GUI mode.
+ *
+ * @author ptrvsrg
+ */
 public class FinishMenu {
 
     private static final String WINNER_AVAILABLE_MENU_COMMAND_MESSAGE = "Available menu commands:"
@@ -42,6 +47,13 @@ public class FinishMenu {
     private final PlayerStatus playerStatus;
     private final int time;
 
+    /**
+     * Instantiates a new FinishMenu.
+     *
+     * @param scanner      the scanner
+     * @param playerStatus the player status
+     * @param time         the game time
+     */
     public FinishMenu(Scanner scanner, PlayerStatus playerStatus, int time) {
         this.scanner = scanner;
         this.playerStatus = playerStatus;
