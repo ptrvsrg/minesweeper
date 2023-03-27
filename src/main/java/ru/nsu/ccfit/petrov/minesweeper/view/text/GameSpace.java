@@ -9,6 +9,9 @@ import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
 import ru.nsu.ccfit.petrov.minesweeper.view.text.components.CellSymbol;
 import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
+/**
+ * The type Game space.
+ */
 public class GameSpace
     implements PropertyChangeListener {
 
@@ -24,6 +27,12 @@ public class GameSpace
     private boolean isGameRuning = true;
     private PlayerStatus playerStatus;
 
+    /**
+     * Instantiates a new Game space.
+     *
+     * @param scanner the scanner
+     * @param model   the model
+     */
     public GameSpace(Scanner scanner, Model model) {
         this.scanner = scanner;
         this.model = model;
@@ -85,12 +94,9 @@ public class GameSpace
             return;
         }
 
-        int x;
-        int y;
-
         try {
-            x = Integer.parseInt(commandArgs[1]);
-            y = Integer.parseInt(commandArgs[2]);
+            int x = Integer.parseInt(commandArgs[1]);
+            int y = Integer.parseInt(commandArgs[2]);
             model.openCell(y, x);
         } catch (IllegalArgumentException e) {
             System.out.println("Incorrect command parameters");
@@ -103,12 +109,9 @@ public class GameSpace
             return;
         }
 
-        int x;
-        int y;
-
         try {
-            x = Integer.parseInt(commandArgs[1]);
-            y = Integer.parseInt(commandArgs[2]);
+            int x = Integer.parseInt(commandArgs[1]);
+            int y = Integer.parseInt(commandArgs[2]);
             model.markCell(y, x);
         } catch (IllegalArgumentException e) {
             System.out.println("Incorrect command parameters");
