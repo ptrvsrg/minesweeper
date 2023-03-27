@@ -76,7 +76,10 @@ public class Model {
         CellView oldCellView = field.getCellView(y, x);
         if (oldCellView == CellView.CLOSED) {
             field.setCellView(y, x, CellView.OPENED);
-            ++openedCellCount;
+            if (!field.isMine(y, x)) {
+                ++openedCellCount;
+            }
+
             propertyChangeSupport.firePropertyChange(OPENED_CELL_VIEW_PROPERTY, null,
                                                      new Point(x, y));
         }
