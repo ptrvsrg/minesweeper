@@ -21,10 +21,15 @@ public class HighScoresDialog
 
     public HighScoresDialog(JFrame owner) {
         super(owner, true);
+
         setTitle(TITLE);
         setSize(400, 500);
         setLocationRelativeTo(null);
+        add(new JScrollPane(createTextArea()));
+        setVisible(true);
+    }
 
+    private JPanel createTextArea() {
         JPanel textArea = new JPanel();
         textArea.setLayout(new BoxLayout(textArea, BoxLayout.Y_AXIS));
         textArea.setBorder(new EmptyBorder(BORDER_INSET, BORDER_INSET, BORDER_INSET, BORDER_INSET));
@@ -37,7 +42,6 @@ public class HighScoresDialog
             textArea.add(scoreLine);
         }
 
-        add(new JScrollPane(textArea));
-        setVisible(true);
+        return textArea;
     }
 }
