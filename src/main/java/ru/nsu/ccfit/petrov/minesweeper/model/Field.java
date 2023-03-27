@@ -58,8 +58,9 @@ public class Field {
 
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
-                if (y + i >= 0 && y + i < height && x + j >= 0 && x + j < width
-                    && mineMatrix[y + i][x + j] != -1) {
+                boolean isXWithinBoundaries = (x + j >= 0) && (x + j < width);
+                boolean isYWithinBoundaries = (y + i >= 0) && (y + i < height);
+                if (isXWithinBoundaries && isYWithinBoundaries && isMine(y + i, x + j)) {
                     if (i == 0 && j == 0) {
                         continue;
                     }
