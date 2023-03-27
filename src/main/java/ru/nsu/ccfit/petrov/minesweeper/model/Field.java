@@ -75,7 +75,7 @@ public class Field {
             for (int j = -1; j <= 1; ++j) {
                 boolean isXWithinBoundaries = (x + j >= 0) && (x + j < width);
                 boolean isYWithinBoundaries = (y + i >= 0) && (y + i < height);
-                if (isXWithinBoundaries && isYWithinBoundaries && isMine(y + i, x + j)) {
+                if (isXWithinBoundaries && isYWithinBoundaries && !isMine(y + i, x + j)) {
                     if (i == 0 && j == 0) {
                         continue;
                     }
