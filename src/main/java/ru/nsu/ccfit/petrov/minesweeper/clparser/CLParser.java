@@ -16,10 +16,8 @@ public class CLParser
      *
      * @param args command line args
      * @return {@code true} - arguments successfully parsed, {@code false} - help option found, help printed
-     * @throws ParseException parse exception
      */
-    public boolean parse(String[] args)
-        throws ParseException {
+    public boolean parse(String[] args) {
         // Add available options
         Options opts = new Options();
         opts.addOption(Option.builder()
