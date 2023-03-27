@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import lombok.Getter;
-import ru.nsu.ccfit.petrov.minesweeper.view.gui.GameSpace;
 
 /**
  * The type {@code CellButton} is class for handling actions on cells.
@@ -29,17 +29,23 @@ public class CellButton
     private static final Color OPENED_CELL_COLOR = Color.WHITE;
     private final int fieldX;
     private final int fieldY;
+    private final BufferedImage mineIcon;
+    private final BufferedImage flagIcon;
 
     /**
      * Instantiates a new Cell button with coordinates (fieldX, fieldY).
      *
-     * @param fieldY the field y
-     * @param fieldX the field x
+     * @param fieldY   the field y
+     * @param fieldX   the field x
+     * @param mineIcon the mine icon
+     * @param flagIcon the flag icon
      */
-    public CellButton(int fieldY, int fieldX) {
+    public CellButton(int fieldY, int fieldX, BufferedImage mineIcon, BufferedImage flagIcon) {
         super();
         this.fieldY = fieldY;
         this.fieldX = fieldX;
+        this.mineIcon = mineIcon;
+        this.flagIcon = flagIcon;
 
         setFocusPainted(false);
         setBackground(NOT_OPENED_CELL_COLOR);
@@ -52,8 +58,8 @@ public class CellButton
         if (getIcon() == null) {
             Dimension size = getSize();
             setIcon(new ImageIcon(
-                GameSpace.flagIcon.getScaledInstance(3 * size.width / 4, 3 * size.height / 4,
-                                                     Image.SCALE_DEFAULT)));
+                flagIcon.getScaledInstance(3 * size.width / 4, 3 * size.height / 4,
+                                           Image.SCALE_DEFAULT)));
         } else {
             setIcon(null);
         }
@@ -69,8 +75,8 @@ public class CellButton
         if (mineAroundCount == -1) {
             Dimension size = getSize();
             setIcon(new ImageIcon(
-                GameSpace.mineIcon.getScaledInstance(3 * size.width / 4, 3 * size.height / 4,
-                                                     Image.SCALE_DEFAULT)));
+                mineIcon.getScaledInstance(3 * size.width / 4, 3 * size.height / 4,
+                                           Image.SCALE_DEFAULT)));
         } else if (mineAroundCount > 0) {
             Dimension size = getSize();
             setIcon(null);
