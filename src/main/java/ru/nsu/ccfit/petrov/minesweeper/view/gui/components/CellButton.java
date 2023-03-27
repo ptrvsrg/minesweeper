@@ -9,6 +9,11 @@ import javax.swing.JButton;
 import lombok.Getter;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.GameSpace;
 
+/**
+ * The type {@code CellButton} is class for handling actions on cells.
+ *
+ * @author ptrvsrg
+ */
 @Getter
 public class CellButton
     extends JButton {
@@ -25,6 +30,12 @@ public class CellButton
     private final int fieldX;
     private final int fieldY;
 
+    /**
+     * Instantiates a new Cell button with coordinates (fieldX, fieldY).
+     *
+     * @param fieldY the field y
+     * @param fieldX the field x
+     */
     public CellButton(int fieldY, int fieldX) {
         super();
         this.fieldY = fieldY;
@@ -34,6 +45,9 @@ public class CellButton
         setBackground(NOT_OPENED_CELL_COLOR);
     }
 
+    /**
+     * Mark cell.
+     */
     public void mark() {
         if (getIcon() == null) {
             Dimension size = getSize();
@@ -45,6 +59,11 @@ public class CellButton
         }
     }
 
+    /**
+     * Open cell.
+     *
+     * @param mineAroundCount the mine around count
+     */
     public void open(byte mineAroundCount) {
         setBackground(OPENED_CELL_COLOR);
         if (mineAroundCount == -1) {
