@@ -1,5 +1,15 @@
 package ru.nsu.ccfit.petrov.minesweeper.view;
 
+/**
+ * The type {@code PlayerStatus} is enum for definition result of game.
+ */
 public enum PlayerStatus {
-        WINNER, LOSER
+    /**
+     * Winner player status.
+     */
+    WINNER,
+    /**
+     * Loser player status.
+     */
+    LOSER
     }
