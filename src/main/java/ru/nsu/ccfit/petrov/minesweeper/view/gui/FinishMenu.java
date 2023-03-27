@@ -27,10 +27,12 @@ public class FinishMenu
     private static final String LOSER_TITLE = "R.I.P";
     private static final String WINNER_BACKGROUND_IMAGE_PATH = "/finish_menu_background_winner.png";
     private static final String LOSER_BACKGROUND_IMAGE_PATH = "/finish_menu_background_loser.png";
+    private final PlayerStatus playerStatus;
     private final int time;
 
     public FinishMenu(GameSpace owner, PlayerStatus playerStatus, int time) {
         super(owner, true);
+        this.playerStatus = playerStatus;
         this.time = time;
 
         setTitle((playerStatus == PlayerStatus.WINNER) ? WINNER_TITLE : LOSER_TITLE);
