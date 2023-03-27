@@ -22,6 +22,11 @@ public class FinishMenu
     private static final String NEW_GAME_TITLE = "New Game";
     private static final String HIGH_SCORES_TITLE = "High Scores";
     private static final String SAVE_SCORE_TITLE = "Save Score";
+    private static final String ABOUT_TITLE = "About";
+    private static final String ABOUT_MESSAGE = "Program \"Minesweeper v1.0\"\n"
+        + "Designer: prtvsrg\n"
+        + "Developer: ptrvsrg\n"
+        + "Source code: https://github.com/ptrvsrg/NSU_OOP_Java/tree/master/Task3";
     private static final String PLAYER_NAME_MESSAGE = "Player Name: ";
     private static final String WINNER_TITLE = "Victory";
     private static final String LOSER_TITLE = "R.I.P";
@@ -64,23 +69,14 @@ public class FinishMenu
     private JPanel createButtonArea() {
         JPanel buttonArea = new JPanel();
         buttonArea.setPreferredSize(new Dimension(getWidth() / 2, getHeight() / 2));
-        buttonArea.setLayout(new GridLayout(3, 1));
+        buttonArea.setLayout(new GridLayout(4, 1));
         buttonArea.setBackground(Utils.getTransparentColor());
         buttonArea.add(createNewGameButton());
         buttonArea.add(createHighScoresButton());
+        buttonArea.add(createSaveScoreButton());
+        buttonArea.add(createAboutButton());
 
-        if (playerStatus == PlayerStatus.WINNER) {
-            buttonArea.add(createSaveScoreButton());
-        }
-
-        BackgroundPanel contentPane = new BackgroundPanel(
-            (playerStatus == PlayerStatus.WINNER) ? WINNER_BACKGROUND_IMAGE_PATH
-                                                  : LOSER_BACKGROUND_IMAGE_PATH);
-        contentPane.setLayout(new FlowLayout(FlowLayout.LEFT));
-        contentPane.add(buttonArea);
-
-        setContentPane(contentPane);
-        setVisible(true);
+        return buttonArea;
     }
 
     private MenuButton createNewGameButton() {
@@ -119,5 +115,17 @@ public class FinishMenu
             }
         });
         return saveScoreButton;
+    }
+
+    private MenuButton createAboutButton() {
+        MenuButton aboutButton = new MenuButton(ABOUT_TITLE);
+        aboutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(FinishMenu.this, ABOUT_MESSAGE, ABOUT_TITLE,
+                                              JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        return aboutButton;
     }
 }
