@@ -9,7 +9,7 @@ import org.apache.commons.cli.*;
  */
 public class CLParser
 {
-    private CommandLine commandLine;
+    private CommandLine commandLine = null;
 
     /**
      * Parses command line arguments.
