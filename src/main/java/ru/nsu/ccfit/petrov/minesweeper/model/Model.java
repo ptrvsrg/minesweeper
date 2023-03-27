@@ -100,10 +100,10 @@ public class Model {
     private void openNeighbourCells(int y, int x) {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
-                if (y + i >= 0 && y + i < field.getHeight() && x + j >= 0
-                    && x + j < field.getWidth()
-                    && field.getCellView(y + i, x + j) == CellView.CLOSED && !field.isMine(y + i,
-                                                                                           x + j)) {
+                boolean isXWithinBoundaries = (x + j >= 0) && (x + j < field.getWidth());
+                boolean isYWithinBoundaries = (y + i >= 0) && (y + i < field.getHeight());
+                if (isXWithinBoundaries && isYWithinBoundaries && !field.isMine(y + i, x + j)
+                    && field.getCellView(y + i, x + j) == CellView.CLOSED) {
                     if (i == 0 && j == 0) {
                         continue;
                     }
