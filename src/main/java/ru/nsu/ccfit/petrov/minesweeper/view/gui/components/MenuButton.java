@@ -6,13 +6,16 @@ import javax.swing.JButton;
 
 public class MenuButton
     extends JButton {
+    private static final int FONT_SIZE = 40;
+
     public MenuButton(String text) {
         super();
+
         setText(text);
         setContentAreaFilled(false);
         setBorderPainted(false);
         setFocusPainted(false);
-        setFont(new Font(Font.DIALOG, Font.BOLD, 40));
+        setFont(new Font(Font.DIALOG, Font.BOLD, FONT_SIZE));
         setForeground(Color.WHITE);
     }
 }
