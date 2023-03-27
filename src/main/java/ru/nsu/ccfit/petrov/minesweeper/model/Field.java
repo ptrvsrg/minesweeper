@@ -6,6 +6,7 @@ import java.util.Set;
 import lombok.Getter;
 
 public class Field {
+    private static final Random randomGenerator = new Random();
     @Getter
     private final int height;
     @Getter
@@ -72,7 +73,6 @@ public class Field {
     }
 
     private Set<Integer> generateUniqueRandomNumbers(int count, int bound) {
-        Random randomGenerator = new Random();
         Set<Integer> nums = new HashSet<>();
 
         int numCount = 0;
