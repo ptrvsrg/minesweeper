@@ -15,8 +15,9 @@ import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
 
 public class HighScoresDialog
     extends JDialog {
-
-    private final String TITLE = "High Scores";
+    private static final String TITLE = "High Scores";
+    private static final int FONT_SIZE = 20;
+    private static final int BORDER_INSET = 10;
 
     public HighScoresDialog(JFrame owner) {
         super(owner, true);
@@ -26,13 +27,13 @@ public class HighScoresDialog
 
         JPanel textArea = new JPanel();
         textArea.setLayout(new BoxLayout(textArea, BoxLayout.Y_AXIS));
-        textArea.setBorder(new EmptyBorder(10, 10, 10, 10));
+        textArea.setBorder(new EmptyBorder(BORDER_INSET, BORDER_INSET, BORDER_INSET, BORDER_INSET));
 
         SortedSet<Score> scores = ScoreRating.getScores();
         for (Score score : scores) {
             JLabel scoreLine = new JLabel(
-                score.getUserName() + " - " + Stopwatch.timeToString(score.getTime()) + "\n");
-            scoreLine.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+                score.getPlayerName() + " - " + Stopwatch.timeToString(score.getTime()) + "\n");
+            scoreLine.setFont(new Font(Font.DIALOG, Font.BOLD, FONT_SIZE));
             textArea.add(scoreLine);
         }
 
