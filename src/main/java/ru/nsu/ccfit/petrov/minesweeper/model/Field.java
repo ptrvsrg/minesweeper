@@ -3,11 +3,14 @@ package ru.nsu.ccfit.petrov.minesweeper.model;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import lombok.Getter;
 
 public class Field {
-
+    @Getter
     private final int height;
+    @Getter
     private final int width;
+    @Getter
     private final int mineCount;
     private final CellView[][] cellViewMatrix;
     private final byte[][] mineMatrix;  // -1 is mine
@@ -82,18 +85,6 @@ public class Field {
         }
 
         return nums;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getMineCount() {
-        return mineCount;
     }
 
     private void checkCoordinates(int y, int x) {
