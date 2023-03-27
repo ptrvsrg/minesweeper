@@ -1,18 +1,12 @@
 package ru.nsu.ccfit.petrov.minesweeper;
 
-import org.apache.commons.cli.ParseException;
 import ru.nsu.ccfit.petrov.minesweeper.clparser.CLParser;
 
 public class Main {
     public static void main(String[] args) {
         CLParser clParser = new CLParser();
-
-        try {
-            if (!clParser.parse(args))
-                return;
-        }
-        catch (ParseException e) {
-            throw new RuntimeException(e);
+        if (!clParser.parse(args)) {
+            return;
         }
 
         String uiMode = clParser.getUIMode();
