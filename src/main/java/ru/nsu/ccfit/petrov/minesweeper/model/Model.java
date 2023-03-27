@@ -29,7 +29,7 @@ public class Model {
                 field = new Field(16, 30, 99);
                 break;
             default:
-                throw new NullPointerException();
+                throw new IllegalArgumentException("Incorrect game level");
         }
     }
 
