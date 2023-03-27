@@ -82,16 +82,10 @@ public class GameSpace
         // Create status panel
         statusPanel = new JPanel();
         initStatusPanel();
-        statusPanel.add(markedCellCounter);
-        statusPanel.add(createNewGameButton());
-        statusPanel.add(stopwatchCounter);
-
-        add(statusPanel, BorderLayout.NORTH);
 
         // Create field panel
         JPanel fieldPanel = new JPanel(new GridLayout(model.getHeight(), model.getWidth()));
         initCells(fieldPanel);
-        add(fieldPanel);
 
         // Set up game space
         setTitle(TITLE);
@@ -105,6 +99,8 @@ public class GameSpace
                 Utils.exitConfirm(GameSpace.this);
             }
         });
+        add(statusPanel, BorderLayout.NORTH);
+        add(fieldPanel);
         setVisible(true);
 
         // Run stopwatch
@@ -123,6 +119,9 @@ public class GameSpace
     private void initStatusPanel() {
         statusPanel.setLayout(new GridLayout(1, 3));
         statusPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        statusPanel.add(markedCellCounter);
+        statusPanel.add(createNewGameButton());
+        statusPanel.add(stopwatchCounter);
     }
 
     private JButton createNewGameButton() {
