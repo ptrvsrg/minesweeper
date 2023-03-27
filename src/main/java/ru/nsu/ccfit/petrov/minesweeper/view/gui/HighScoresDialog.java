@@ -13,12 +13,22 @@ import ru.nsu.ccfit.petrov.minesweeper.model.score.Score;
 import ru.nsu.ccfit.petrov.minesweeper.model.score.ScoreRating;
 import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
 
+/**
+ * The type {@code HighScoresDialog} is class that describe a dialog window with a table of records.
+ *
+ * @author ptrvsrg
+ */
 public class HighScoresDialog
     extends JDialog {
     private static final String TITLE = "High Scores";
     private static final int FONT_SIZE = 20;
     private static final int BORDER_INSET = 10;
 
+    /**
+     * Instantiates a new HighScoresDialog.
+     *
+     * @param owner the owner
+     */
     public HighScoresDialog(JFrame owner) {
         super(owner, true);
 
