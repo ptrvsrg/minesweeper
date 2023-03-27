@@ -38,8 +38,12 @@ public class CLParser
         org.apache.commons.cli.CommandLineParser clParser = new DefaultParser();
 
         // Parse args
-        commandLine = clParser.parse(opts,
-                                     args);
+        try{
+            commandLine = clParser.parse(opts, args);
+        } catch (ParseException e) {
+            System.out.println(e.getLocalizedMessage());
+            printHelp(opts);
+        }
 
         // Print help
         if (commandLine.hasOption("help")) {
