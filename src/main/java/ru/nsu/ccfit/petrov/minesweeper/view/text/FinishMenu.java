@@ -9,27 +9,30 @@ import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
 public class FinishMenu {
 
-    private static final String WINNER_AVAILABLE_MENU_COMMAND_MESSAGE =
-        "Available menu commands:" + "\n\tnew_game - start a new game"
-            + "\n\thigh_scores - show high score table" + "\n\tsave_score - save current game score"
-            + "\n\tabout - display information about the game" + "\n\texit - exit the game";
-    private static final String LOSER_AVAILABLE_MENU_COMMAND_MESSAGE =
-        "Available menu commands:" + "\n\tnew_game - start a new game"
+    private static final String WINNER_AVAILABLE_MENU_COMMAND_MESSAGE = "Available menu commands:"
+            + "\n\tnew_game - start a new game"
             + "\n\thigh_scores - show high score table"
-            + "\n\tabout - display information about the game" + "\n\texit - exit the game";
-    private static final String ABOUT_MESSAGE =
-        "Program \"Minesweeper v1.0\"\n" + "Designer: prtvsrg\n" + "Developer: ptrvsrg\n"
+            + "\n\tsave_score - save current game score"
+            + "\n\tabout - display information about the game"
+            + "\n\texit - exit the game";
+    private static final String LOSER_AVAILABLE_MENU_COMMAND_MESSAGE = "Available menu commands:"
+            + "\n\tnew_game - start a new game"
+            + "\n\thigh_scores - show high score table"
+            + "\n\tabout - display information about the game"
+            + "\n\texit - exit the game";
+    private static final String ABOUT_MESSAGE = "Program \"Minesweeper v1.0\"\n"
+            + "Designer: prtvsrg\n" + "Developer: ptrvsrg\n"
             + "Source code: https://github.com/ptrvsrg/NSU_OOP_Java/tree/master/Task3";
-    private static final String LOSER_MESSAGE =
-        "\n" + "██╗░░░██╗░█████╗░██╗░░░██╗  ░██╗░░░░░░█████╗░░██████╗███████╗\n"
+    private static final String LOSER_MESSAGE = "\n"
+            + "██╗░░░██╗░█████╗░██╗░░░██╗  ░██╗░░░░░░█████╗░░██████╗███████╗\n"
             + "╚██╗░██╔╝██╔══██╗██║░░░██║  ░██║░░░░░██╔══██╗██╔════╝██╔════╝\n"
             + "░╚████╔╝░██║░░██║██║░░░██║  ░██║░░░░░██║░░██║╚█████╗░█████╗░░\n"
             + "░░╚██╔╝░░██║░░██║██║░░░██║  ░██║░░░░░██║░░██║░╚═══██╗██╔══╝░░\n"
             + "░░░██║░░░╚█████╔╝╚██████╔╝  ░███████╗╚█████╔╝██████╔╝███████╗\n"
             + "░░░╚═╝░░░░╚════╝░░╚═════╝░  ░╚══════╝░╚════╝░╚═════╝░╚══════╝\n";
 
-    private static final String WINNER_MESSAGE =
-        "\n" + "██╗░░░██╗░█████╗░██╗░░░██╗   ░██╗░░░░░░░██╗░█████╗░███╗░░██╗\n"
+    private static final String WINNER_MESSAGE = "\n"
+            + "██╗░░░██╗░█████╗░██╗░░░██╗   ░██╗░░░░░░░██╗░█████╗░███╗░░██╗\n"
             + "╚██╗░██╔╝██╔══██╗██║░░░██║   ░██║░░██╗░░██║██╔══██╗████╗░██║\n"
             + "░╚████╔╝░██║░░██║██║░░░██║   ░╚██╗████╗██╔╝██║░░██║██╔██╗██║\n"
             + "░░╚██╔╝░░██║░░██║██║░░░██║   ░░████╔═████║░██║░░██║██║╚████║\n"
