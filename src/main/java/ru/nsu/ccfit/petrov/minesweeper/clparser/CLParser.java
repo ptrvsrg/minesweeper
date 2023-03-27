@@ -46,11 +46,8 @@ public class CLParser
         }
 
         // Print help
-        if (commandLine.hasOption("help")) {
-            HelpFormatter helpFormatter = new HelpFormatter();
-            helpFormatter.printHelp("minesweeper",
-                                    opts,
-                                    true);
+        if (commandLine == null || commandLine.hasOption("help")) {
+            printHelp(opts);
             return false;
         }
 
@@ -68,6 +65,10 @@ public class CLParser
      * @return UI mode name
      */
     public String getUIMode() {
+        if (commandLine == null) {
+            return null;
+        }
+
         return commandLine.getOptionValue("ui-mode");
     }
 }
