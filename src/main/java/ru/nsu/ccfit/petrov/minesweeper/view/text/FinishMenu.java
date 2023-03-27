@@ -47,11 +47,18 @@ public class FinishMenu {
         this.playerStatus = playerStatus;
         this.time = time;
 
-        System.out.println((playerStatus == PlayerStatus.WINNER) ? WINNER_MESSAGE : LOSER_MESSAGE);
-        System.out.println(
-            (playerStatus == PlayerStatus.WINNER) ? WINNER_AVAILABLE_MENU_COMMAND_MESSAGE
-                                                  : LOSER_AVAILABLE_MENU_COMMAND_MESSAGE);
+        printPlayerStatus();
+        printAvailableCommands();
         processCommand();
+    }
+
+    private void printPlayerStatus() {
+        System.out.println((playerStatus == PlayerStatus.WINNER) ? WINNER_MESSAGE : LOSER_MESSAGE);
+    }
+
+    private void printAvailableCommands() {
+        System.out.println((playerStatus == PlayerStatus.WINNER) ? WINNER_AVAILABLE_MENU_COMMAND_MESSAGE
+                                                                 : LOSER_AVAILABLE_MENU_COMMAND_MESSAGE);
     }
 
     private void processCommand() {
@@ -84,9 +91,7 @@ public class FinishMenu {
                 }
                 default:
                     System.out.println("Unknown command");
-                    System.out.println(
-                        (playerStatus == PlayerStatus.WINNER) ? WINNER_AVAILABLE_MENU_COMMAND_MESSAGE
-                                                              : LOSER_AVAILABLE_MENU_COMMAND_MESSAGE);
+                    printAvailableCommands();
             }
         }
     }
