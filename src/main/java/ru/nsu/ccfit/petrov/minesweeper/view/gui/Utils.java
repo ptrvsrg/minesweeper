@@ -11,8 +11,9 @@ public class Utils {
     private Utils() {
         throw new IllegalStateException("Utility class");
     }
+
     public static void exitConfirm(JFrame owner) {
-        int res = JOptionPane.showConfirmDialog(owner, "Are you sure?", "Confirmation",
+        int res = JOptionPane.showConfirmDialog(owner, EXIT_CONFIRM_MESSAGE, EXIT_CONFIRM_TITLE,
                                                 JOptionPane.YES_NO_OPTION);
         if (res == JOptionPane.YES_OPTION) {
             owner.dispose();
