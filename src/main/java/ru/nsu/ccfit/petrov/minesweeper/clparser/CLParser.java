@@ -53,6 +53,11 @@ public class CLParser
         return true;
     }
 
+    private void printHelp(Options opts) {
+        HelpFormatter helpFormatter = new HelpFormatter();
+        helpFormatter.printHelp("minesweeper", opts, true);
+    }
+
     /**
      * Gets value of {@code ui-mode} option
      *
