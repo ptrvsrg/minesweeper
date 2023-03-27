@@ -17,7 +17,6 @@ import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.MenuButton;
 
 public class StartMenu
     extends JFrame {
-
     private static final String TITLE = "Welcome \"Minesweeper\"";
     private static final String BEGINNER_BUTTON_TEXT = "Beginner";
     private static final String INTERMEDIATE_BUTTON_TEXT = "Intermediate";
@@ -36,7 +35,19 @@ public class StartMenu
                 Utils.exitConfirm(StartMenu.this);
             }
         });
+        setContentPane(createContentPane());
+        setVisible(true);
+    }
 
+    private BackgroundPanel createContentPane() {
+        BackgroundPanel contentPane = new BackgroundPanel(BACKGROUND_IMAGE_PATH);
+        contentPane.setLayout(new FlowLayout(FlowLayout.LEFT));
+        contentPane.add(createButtonArea());
+
+        return contentPane;
+    }
+
+    private JPanel createButtonArea() {
         JPanel buttonArea = new JPanel();
         buttonArea.setPreferredSize(new Dimension(getWidth() / 2, getHeight() / 2));
         buttonArea.setLayout(new GridLayout(3, 1));
@@ -45,12 +56,7 @@ public class StartMenu
         buttonArea.add(createLevelButton(INTERMEDIATE_BUTTON_TEXT, Level.INTERMEDIATE));
         buttonArea.add(createLevelButton(EXPERT_BUTTON_TEXT, Level.EXPERT));
 
-        BackgroundPanel contentPane = new BackgroundPanel(BACKGROUND_IMAGE_PATH);
-        contentPane.setLayout(new FlowLayout(FlowLayout.LEFT));
-        contentPane.add(buttonArea);
-
-        setContentPane(contentPane);
-        setVisible(true);
+        return buttonArea;
     }
 
     private MenuButton createLevelButton(String levelText, Level level) {
