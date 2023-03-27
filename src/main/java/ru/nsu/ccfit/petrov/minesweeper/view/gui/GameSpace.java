@@ -39,9 +39,8 @@ public class GameSpace
     private static final String MINE_ICON_PATH = "/mine.png";
     private static final String FLAG_ICON_PATH = "/flag.png";
     private static final String STOPWATCH_ICON_PATH = "/stopwatch.png";
-    public static final BufferedImage mineIcon;
-    public static final BufferedImage flagIcon;
-    public static final BufferedImage stopwatchIcon;
+    private static final BufferedImage flagIcon;
+    private static final BufferedImage stopwatchIcon;
     private final Model model;
     private final Stopwatch stopwatch;
     private final CellButton[][] cells;
@@ -51,8 +50,6 @@ public class GameSpace
 
     static {
         try {
-            mineIcon = ImageIO.read(
-                Objects.requireNonNull(GameSpace.class.getResourceAsStream(MINE_ICON_PATH)));
             flagIcon = ImageIO.read(
                 Objects.requireNonNull(GameSpace.class.getResourceAsStream(FLAG_ICON_PATH)));
             stopwatchIcon = ImageIO.read(
@@ -143,9 +140,17 @@ public class GameSpace
     }
 
     private void initCells(JPanel fieldPanel) {
+        BufferedImage mineIcon;
+        try {
+            mineIcon = ImageIO.read(
+                Objects.requireNonNull(GameSpace.class.getResourceAsStream(MINE_ICON_PATH)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         for (int i = 0; i < cells.length; ++i) {
             for (int j = 0; j < cells[0].length; ++j) {
-                cells[i][j] = new CellButton(i, j);
+                cells[i][j] = new CellButton(i, j, mineIcon, flagIcon);
                 cells[i][j].addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e) {
