@@ -10,7 +10,9 @@ import ru.nsu.ccfit.petrov.minesweeper.view.text.components.CellSymbol;
 import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
 /**
- * The type Game space.
+ * The type {@code GameSpace} is class that describe the game space in text mode.
+ *
+ * @author ptrvsrg
  */
 public class GameSpace
     implements PropertyChangeListener {
@@ -28,7 +30,7 @@ public class GameSpace
     private PlayerStatus playerStatus;
 
     /**
-     * Instantiates a new Game space.
+     * Instantiates a new GameSpace.
      *
      * @param scanner the scanner
      * @param model   the model
@@ -149,6 +151,12 @@ public class GameSpace
         }
     }
 
+    /**
+     * This method gets called when a bound property is changed.
+     *
+     * @param evt A PropertyChangeEvent object describing the event source and the property that has
+     *            changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String propertyName = evt.getPropertyName();
