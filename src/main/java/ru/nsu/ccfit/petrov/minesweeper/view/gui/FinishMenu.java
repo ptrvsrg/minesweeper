@@ -19,15 +19,14 @@ import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
 public class FinishMenu
     extends JDialog {
-
-    private final String NEW_GAME_TEXT = "New Game";
-    private final String HIGH_SCORES_TEXT = "High Scores";
-    private final String SAVE_SCORE_TEXT = "Save Score";
-    private final String PLAYER_NAME_TEXT = "Player Name: ";
-    private final String WINNER_TITLE = "Victory";
-    private final String LOSER_TITLE = "R.I.P";
-    private final String WINNER_BACKGROUND_IMAGE_PATH = "/finish_menu_background_winner.png";
-    private final String LOSER_BACKGROUND_IMAGE_PATH = "/finish_menu_background_loser.png";
+    private static final String NEW_GAME_TITLE = "New Game";
+    private static final String HIGH_SCORES_TITLE = "High Scores";
+    private static final String SAVE_SCORE_TITLE = "Save Score";
+    private static final String PLAYER_NAME_MESSAGE = "Player Name: ";
+    private static final String WINNER_TITLE = "Victory";
+    private static final String LOSER_TITLE = "R.I.P";
+    private static final String WINNER_BACKGROUND_IMAGE_PATH = "/finish_menu_background_winner.png";
+    private static final String LOSER_BACKGROUND_IMAGE_PATH = "/finish_menu_background_loser.png";
     private final int time;
 
     public FinishMenu(GameSpace owner, PlayerStatus playerStatus, int time) {
@@ -68,7 +67,7 @@ public class FinishMenu
     }
 
     private MenuButton createNewGameButton() {
-        MenuButton newGameButton = new MenuButton(NEW_GAME_TEXT);
+        MenuButton newGameButton = new MenuButton(NEW_GAME_TITLE);
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,7 +80,7 @@ public class FinishMenu
     }
 
     private MenuButton createHighScoresButton() {
-        MenuButton highScoresButton = new MenuButton(HIGH_SCORES_TEXT);
+        MenuButton highScoresButton = new MenuButton(HIGH_SCORES_TITLE);
         highScoresButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,12 +91,12 @@ public class FinishMenu
     }
 
     private MenuButton createSaveScoreButton() {
-        MenuButton saveScoreButton = new MenuButton(SAVE_SCORE_TEXT);
+        MenuButton saveScoreButton = new MenuButton(SAVE_SCORE_TITLE);
         saveScoreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String playerName = JOptionPane.showInputDialog(FinishMenu.this,
-                                                                PLAYER_NAME_TEXT, SAVE_SCORE_TEXT,
+                                                                PLAYER_NAME_MESSAGE, SAVE_SCORE_TITLE,
                                                                 JOptionPane.INFORMATION_MESSAGE);
                 ScoreRating.saveScore(new Score(playerName, time));
             }
