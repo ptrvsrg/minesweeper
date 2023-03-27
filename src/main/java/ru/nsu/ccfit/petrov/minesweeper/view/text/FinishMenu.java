@@ -8,7 +8,7 @@ import ru.nsu.ccfit.petrov.minesweeper.model.score.ScoreRating;
 import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
 /**
- * The type {@code FinishMenu} is class that describe the finish menu in GUI mode.
+ * The type {@code FinishMenu} is class that describe the finish menu in text mode.
  *
  * @author ptrvsrg
  */
