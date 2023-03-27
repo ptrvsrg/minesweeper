@@ -13,7 +13,6 @@ import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
  * @author ptrvsrg
  */
 public class FinishMenu {
-
     private static final String WINNER_AVAILABLE_MENU_COMMAND_MESSAGE = "Available menu commands:"
             + "\n\tnew_game - start a new game"
             + "\n\thigh_scores - show high score table"

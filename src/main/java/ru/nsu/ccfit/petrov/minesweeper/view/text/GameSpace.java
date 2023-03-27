@@ -16,7 +16,6 @@ import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
  */
 public class GameSpace
     implements PropertyChangeListener {
-
     private static final String AVAILABLE_GAME_COMMAND_MESSAGE =
         "Available game commands:"
             + "\n\to <x> <y> - open cell (x, y)"

@@ -4,7 +4,6 @@ import org.apache.commons.cli.ParseException;
 import ru.nsu.ccfit.petrov.minesweeper.clparser.CLParser;
 
 public class Main {
-
     public static void main(String[] args) {
         CLParser clParser = new CLParser();
 
