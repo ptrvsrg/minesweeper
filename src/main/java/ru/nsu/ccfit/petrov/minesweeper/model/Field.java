@@ -6,6 +6,7 @@ import java.util.Set;
 import lombok.Getter;
 
 public class Field {
+    private static final int MINE = -1;
     private static final Random randomGenerator = new Random();
     @Getter
     private final int height;
@@ -110,7 +111,7 @@ public class Field {
     }
 
     public boolean isMine(int y, int x) {
-        return getMineCountAround(y, x) == -1;
+        return getMineCountAround(y, x) == MINE;
     }
 
     public boolean areThereMinesAround(int y, int x) {
