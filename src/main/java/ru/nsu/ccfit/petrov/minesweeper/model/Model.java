@@ -3,10 +3,11 @@ package ru.nsu.ccfit.petrov.minesweeper.model;
 import java.awt.Point;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import lombok.NonNull;
+import lombok.Getter;
 
 public class Model {
-    private final @NonNull Field field;
+    private final Field field;
+    @Getter
     private int markedCellCount = 0;
     private int openedCellCount = 0;
     private boolean isGameOver = false;
@@ -44,9 +45,6 @@ public class Model {
         return field.getMineCount();
     }
 
-    public int getMarkedCellCount() {
-        return markedCellCount;
-    }
 
     public byte getMineCountAround(int y, int x) {
         return field.getMineCountAround(y, x);
