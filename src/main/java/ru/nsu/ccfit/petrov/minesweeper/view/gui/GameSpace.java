@@ -73,11 +73,11 @@ public class GameSpace
 
         // Create marked cell counter
         markedCellCounter = new JLabel();
-        initMarkedCellCounter();
+        initCounter(markedCellCounter, flagIcon);
 
         // Create stopwatch
         stopwatchCounter = new JLabel();
-        initStopwatchCounterLabel();
+        initCounter(stopwatchCounter, stopwatchIcon);
 
         // Create status panel
         statusPanel = new JPanel();
@@ -111,22 +111,13 @@ public class GameSpace
         stopwatch.run();
     }
 
-    private void initMarkedCellCounter() {
-        markedCellCounter.setIcon(
-            new ImageIcon(GameSpace.flagIcon.getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-        markedCellCounter.setText(model.getMarkedCellCount() + " / " + model.getMineCount());
-        markedCellCounter.setFont(new Font(Font.DIALOG, Font.BOLD, 40));
-        markedCellCounter.setVerticalAlignment(JLabel.CENTER);
-        markedCellCounter.setHorizontalAlignment(JLabel.CENTER);
-    }
-
-    private void initStopwatchCounterLabel() {
-        stopwatchCounter.setIcon(
-            new ImageIcon(GameSpace.stopwatchIcon.getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-        stopwatchCounter.setText(Stopwatch.timeToString(0));
-        stopwatchCounter.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
-        stopwatchCounter.setVerticalAlignment(JLabel.CENTER);
-        stopwatchCounter.setHorizontalAlignment(JLabel.CENTER);
+    private void initCounter(JLabel counter, BufferedImage mineIcon) {
+        counter.setIcon(
+            new ImageIcon(mineIcon.getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+        counter.setText(model.getMarkedCellCount() + " / " + model.getMineCount());
+        counter.setFont(new Font(Font.DIALOG, Font.BOLD, 40));
+        counter.setVerticalAlignment(JLabel.CENTER);
+        counter.setHorizontalAlignment(JLabel.CENTER);
     }
 
     private void initStatusPanel() {
