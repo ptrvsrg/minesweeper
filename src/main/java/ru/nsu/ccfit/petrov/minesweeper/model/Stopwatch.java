@@ -6,8 +6,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
+/**
+ * The type {@code Stopwatch} is class for measuring time.
+ *
+ * @author ptrvsrg
+ */
 public class Stopwatch
 {
+    /**
+     * The constant STOPWATCH_PROPERTY is constant for {@link PropertyChangeListener}.
+     */
     public static final String STOPWATCH_PROPERTY = "stopwatchProperty";
     private int second = -1;
     private boolean isRunning = false;
@@ -16,6 +24,10 @@ public class Stopwatch
 
     private class StopwatchTask
         extends TimerTask {
+
+        /**
+         * The action to be performed by this timer task.
+         */
         @Override
         public void run() {
             ++second;
@@ -23,6 +35,9 @@ public class Stopwatch
         }
     }
 
+    /**
+     * Runs stopwatch.
+     */
     public void run() {
         if (isRunning)
             return;
@@ -32,6 +47,9 @@ public class Stopwatch
         timer.scheduleAtFixedRate(new StopwatchTask(), 0, 1000);
     }
 
+    /**
+     * Stops stopwatch.
+     */
     public void stop() {
         if (!isRunning)
             return;
@@ -41,15 +59,36 @@ public class Stopwatch
         timer.purge();
     }
 
+    /**
+     * Gets the elapsed time between calls to {@link Stopwatch#run()} and {@link Stopwatch#stop()}
+     *
+     * @return the second
+     */
     public int getSecond() {
         return Math.max(second, 0);
     }
 
+    /**
+     * Adds property change listener.
+     *
+     * @param listener the property change listener
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
 
+    /**
+     * Converts time to string.
+     *
+     * @param seconds the seconds
+     * @return the string representation of time
+     * @throws IllegalArgumentException if second count is negative
+     */
     public static String timeToString(int seconds) {
+        if (seconds < 0) {
+            throw new IllegalArgumentException("Negative time");
+        }
+
         return String.format("%d:%02d:%02d", seconds / 3600, seconds / 60 % 60, seconds % 60);
     }
 }
