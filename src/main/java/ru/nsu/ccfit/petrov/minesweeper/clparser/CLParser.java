@@ -47,6 +47,8 @@ public class CLParser
 
         // Print help
         if (commandLine == null || commandLine.hasOption("help")) {
+            // Removing parsed option values
+            commandLine = null;
             printHelp(opts);
             return false;
         }
