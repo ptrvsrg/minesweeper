@@ -122,6 +122,7 @@ public class FinishMenu
         highScoresButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
+             * In this case, it creates a window with a table of results.
              *
              * @param e the event to be processed
              */
