@@ -28,7 +28,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import ru.nsu.ccfit.petrov.minesweeper.model.Model;
 import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
-import ru.nsu.ccfit.petrov.minesweeper.view.gui.FinishMenu.PlayerStatus;
+import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.CellButton;
 
 public class GameSpace

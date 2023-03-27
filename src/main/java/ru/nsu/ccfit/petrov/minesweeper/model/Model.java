@@ -16,10 +16,6 @@ public class Model {
     public static final String MARKED_CELL_COUNT_PROPERTY = "markedCellCountProperty";
     public static final String IS_WINNER_PROPERTY = "isWinnerProperty";
 
-    public enum Level {
-        BEGINNER, INTERMEDIATE, EXPERT
-    }
-
     public Model(Level level) {
         switch (level) {
             case BEGINNER:

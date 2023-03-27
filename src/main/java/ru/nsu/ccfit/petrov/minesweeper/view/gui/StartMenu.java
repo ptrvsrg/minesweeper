@@ -10,8 +10,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import ru.nsu.ccfit.petrov.minesweeper.model.Level;
 import ru.nsu.ccfit.petrov.minesweeper.model.Model;
-import ru.nsu.ccfit.petrov.minesweeper.model.Model.Level;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.BackgroundPanel;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.MenuButton;
 
