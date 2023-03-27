@@ -32,7 +32,7 @@ public class Main {
                     throw new IllegalArgumentException("No such UI mode found\n");
             }
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 }
