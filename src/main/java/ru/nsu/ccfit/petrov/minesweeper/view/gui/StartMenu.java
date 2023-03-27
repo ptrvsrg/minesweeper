@@ -15,6 +15,11 @@ import ru.nsu.ccfit.petrov.minesweeper.model.Model;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.BackgroundPanel;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.MenuButton;
 
+/**
+ * The type {@code FinishMenu} is class that describe the start menu in GUI mode.
+ *
+ * @author ptrvsrg
+ */
 public class StartMenu
     extends JFrame {
     private static final String TITLE = "Welcome \"Minesweeper\"";
@@ -23,6 +28,9 @@ public class StartMenu
     private static final String EXPERT_BUTTON_TEXT = "Expert";
     private static final String BACKGROUND_IMAGE_PATH = "/start_menu_background.png";
 
+    /**
+     * Instantiates a new StartMenu.
+     */
     public StartMenu() {
         setTitle(TITLE);
         setSize(800, 600);
@@ -30,6 +38,12 @@ public class StartMenu
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
+            /**
+             * Invoked when a window is in the process of being closed. The
+             * close operation can be overridden at this point.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void windowClosing(WindowEvent e) {
                 Utils.exitConfirm(StartMenu.this);
@@ -62,6 +76,12 @@ public class StartMenu
     private MenuButton createLevelButton(String levelText, Level level) {
         MenuButton levelButton = new MenuButton(levelText);
         levelButton.addActionListener(new ActionListener() {
+
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
