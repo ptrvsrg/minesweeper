@@ -35,16 +35,7 @@ public class ScoreRating {
             throw new RuntimeException(e);
         }
 
-        Comparator<Score> comparator = (o1, o2) -> {
-            if (o1.getTime() == o2.getTime()) {
-                return o1.getUserName().compareTo(o2.getUserName());
-            }
-
-            return Integer.compare(o1.getTime(), o2.getTime());
-        };
-
-        TreeSet<Score> processedScores = new TreeSet<>(comparator);
-
+        TreeSet<Score> processedScores = new TreeSet<>(Score.getComparator());
         for (String[] score : readScores) {
             if (score.length != 2) {
                 throw new IllegalArgumentException("Incorrect file format");
@@ -72,7 +63,7 @@ public class ScoreRating {
 
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(scoreFile, true))) {
             csvWriter.writeNext(
-                new String[]{score.getUserName(), Integer.toString(score.getTime())});
+                new String[]{score.getPlayerName(), Integer.toString(score.getTime())});
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
