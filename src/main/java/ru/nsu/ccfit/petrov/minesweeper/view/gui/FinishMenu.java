@@ -17,6 +17,11 @@ import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.BackgroundPanel;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.MenuButton;
 import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
+/**
+ * The type {@code FinishMenu} is class that describe the finish menu.
+ *
+ * @author ptrvsrg
+ */
 public class FinishMenu
     extends JDialog {
     private static final String NEW_GAME_TITLE = "New Game";
@@ -35,6 +40,13 @@ public class FinishMenu
     private final PlayerStatus playerStatus;
     private final int time;
 
+    /**
+     * Instantiates a new FinishMenu.
+     *
+     * @param owner        the owner of finish menu
+     * @param playerStatus the player status
+     * @param time         the game time
+     */
     public FinishMenu(GameSpace owner, PlayerStatus playerStatus, int time) {
         super(owner, true);
         this.playerStatus = playerStatus;
@@ -46,6 +58,12 @@ public class FinishMenu
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
+            /**
+             * Invoked when a window is in the process of being closed. The
+             * close operation can be overridden at this point.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void windowClosing(WindowEvent e) {
                 Utils.exitConfirm((GameSpace) getOwner());
@@ -82,6 +100,11 @@ public class FinishMenu
     private MenuButton createNewGameButton() {
         MenuButton newGameButton = new MenuButton(NEW_GAME_TITLE);
         newGameButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -95,6 +118,11 @@ public class FinishMenu
     private MenuButton createHighScoresButton() {
         MenuButton highScoresButton = new MenuButton(HIGH_SCORES_TITLE);
         highScoresButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 new HighScoresDialog((GameSpace) getOwner());
@@ -106,6 +134,11 @@ public class FinishMenu
     private MenuButton createSaveScoreButton() {
         MenuButton saveScoreButton = new MenuButton(SAVE_SCORE_TITLE);
         saveScoreButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 String playerName = JOptionPane.showInputDialog(FinishMenu.this,
@@ -120,6 +153,11 @@ public class FinishMenu
     private MenuButton createAboutButton() {
         MenuButton aboutButton = new MenuButton(ABOUT_TITLE);
         aboutButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(FinishMenu.this, ABOUT_MESSAGE, ABOUT_TITLE,
