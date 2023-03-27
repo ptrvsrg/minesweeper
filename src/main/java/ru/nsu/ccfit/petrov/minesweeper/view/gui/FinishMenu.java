@@ -15,6 +15,7 @@ import ru.nsu.ccfit.petrov.minesweeper.model.score.Score;
 import ru.nsu.ccfit.petrov.minesweeper.model.score.ScoreRating;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.BackgroundPanel;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.MenuButton;
+import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
 public class FinishMenu
     extends JDialog {
@@ -28,10 +29,6 @@ public class FinishMenu
     private final String WINNER_BACKGROUND_IMAGE_PATH = "/finish_menu_background_winner.png";
     private final String LOSER_BACKGROUND_IMAGE_PATH = "/finish_menu_background_loser.png";
     private final int time;
-
-    public enum PlayerStatus {
-        WINNER, LOSER
-    }
 
     public FinishMenu(GameSpace owner, PlayerStatus playerStatus, int time) {
         super(owner, true);
