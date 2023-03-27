@@ -12,7 +12,7 @@ public class Stopwatch
     private int second = -1;
     private boolean isRunning = false;
     private Timer timer;
-    private PropertyChangeSupport propertyChangeSupport;
+    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
     private class StopwatchTask
         extends TimerTask {
@@ -46,10 +46,6 @@ public class Stopwatch
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-        if (propertyChangeSupport == null) {
-            propertyChangeSupport = new PropertyChangeSupport(this);
-        }
-
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
 

@@ -10,7 +10,7 @@ public class Model {
     private int markedCellCount = 0;
     private int openedCellCount = 0;
     private boolean isGameOver = false;
-    private PropertyChangeSupport propertyChangeSupport = null;
+    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
     public static final String MARKED_CELL_VIEW_PROPERTY = "markedCellViewProperty";
     public static final String OPENED_CELL_VIEW_PROPERTY = "openedCellViewProperty";
     public static final String MARKED_CELL_COUNT_PROPERTY = "markedCellCountProperty";
@@ -122,10 +122,6 @@ public class Model {
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-        if (propertyChangeSupport == null) {
-            propertyChangeSupport = new PropertyChangeSupport(this);
-        }
-
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
 }
