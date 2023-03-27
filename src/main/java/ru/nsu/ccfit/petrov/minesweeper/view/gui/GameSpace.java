@@ -31,6 +31,11 @@ import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
 import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.CellButton;
 
+/**
+ * The type {@code GameSpace} is class that describe the game space in GUI mode.
+ *
+ * @author ptrvsrg
+ */
 public class GameSpace
     extends JFrame
     implements PropertyChangeListener {
@@ -59,6 +64,11 @@ public class GameSpace
         }
     }
 
+    /**
+     * Instantiates a new GameSpace.
+     *
+     * @param model the game model
+     */
     public GameSpace(Model model) {
         this.model = model;
         stopwatch = new Stopwatch();
@@ -72,7 +82,7 @@ public class GameSpace
         markedCellCounter = new JLabel();
         initCounter(markedCellCounter, flagIcon);
 
-        // Create stopwatch
+        // Create stopwatch counter
         stopwatchCounter = new JLabel();
         initCounter(stopwatchCounter, stopwatchIcon);
 
@@ -91,6 +101,12 @@ public class GameSpace
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
+            /**
+             * Invoked when a window is in the process of being closed. The
+             * close operation can be overridden at this point.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void windowClosing(WindowEvent e) {
                 Utils.exitConfirm(GameSpace.this);
@@ -129,6 +145,11 @@ public class GameSpace
         newGameButton.setContentAreaFilled(false);
         newGameButton.setBorderPainted(false);
         newGameButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -152,6 +173,11 @@ public class GameSpace
             for (int j = 0; j < cells[0].length; ++j) {
                 cells[i][j] = new CellButton(i, j, mineIcon, flagIcon);
                 cells[i][j].addMouseListener(new MouseAdapter() {
+                    /**
+                     * Invoked when a mouse button has been pressed on a component.
+                     *
+                     * @param e the event to be processed
+                     */
                     @Override
                     public void mousePressed(MouseEvent e) {
                         if (SwingUtilities.isLeftMouseButton(e)) {
@@ -179,6 +205,12 @@ public class GameSpace
         return new Dimension(fieldPanelWidth, fieldPanelHeight + statusPanel.getHeight());
     }
 
+    /**
+     * This method gets called when a bound property is changed.
+     *
+     * @param evt A PropertyChangeEvent object describing the event source and the property that has
+     *            changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String propertyName = evt.getPropertyName();
