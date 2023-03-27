@@ -4,10 +4,20 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
 
+/**
+ * The type {@code MenuButton} is class that describe the button for start and finish menu.
+ *
+ * @author ptrvsrg
+ */
 public class MenuButton
     extends JButton {
     private static final int FONT_SIZE = 40;
 
+    /**
+     * Instantiates a new MenuButton.
+     *
+     * @param text the text
+     */
     public MenuButton(String text) {
         super();
 
