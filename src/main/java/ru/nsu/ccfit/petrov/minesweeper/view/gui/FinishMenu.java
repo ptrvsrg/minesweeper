@@ -152,7 +152,9 @@ public class FinishMenu
                 String playerName = JOptionPane.showInputDialog(FinishMenu.this,
                                                                 PLAYER_NAME_MESSAGE, SAVE_SCORE_TITLE,
                                                                 JOptionPane.INFORMATION_MESSAGE);
-                ScoreRating.saveScore(new Score(playerName, time));
+                if (playerName != null && !playerName.isEmpty()) {
+                    ScoreRating.saveScore(new Score(playerName, time));
+                }
             }
         });
         return saveScoreButton;
