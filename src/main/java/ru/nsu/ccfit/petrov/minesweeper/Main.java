@@ -26,7 +26,7 @@ public class Main {
                 case "GUI":
                     new ru.nsu.ccfit.petrov.minesweeper.view.gui.StartMenu();
                     break;
-                case "Text":
+                case "text":
                     new ru.nsu.ccfit.petrov.minesweeper.view.text.StartMenu();
                     break;
                 default:
