@@ -84,7 +84,8 @@ public class Model {
 
         boolean areAllCellsOpened =
             openedCellCount == field.getHeight() * field.getWidth() - field.getMineCount();
-        if (!isGameOver && (field.isMine(y, x) || areAllCellsOpened)) {
+        boolean isOpenedMine = field.isMine(y, x) && field.getCellView(y, x) == CellView.OPENED;
+        if (!isGameOver && (isOpenedMine || areAllCellsOpened)) {
                 isGameOver = true;
                 openAllMines();
                 propertyChangeSupport.firePropertyChange(IS_WINNER_PROPERTY, null,
