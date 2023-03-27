@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.petrov.minesweeper.model;
 
 /**
- * The type {@code CellView} is enum for to define cell view mode.
+ * The type {@code CellView} is enum for definition cell view.
  *
  * @author ptrvsrg
  */
