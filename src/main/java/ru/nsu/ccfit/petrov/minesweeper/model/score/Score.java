@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Score
 {
-    private final String userName;
+    private final String playerName;
     private final int time;
 
     public static Comparator<Score> getComparator() {
