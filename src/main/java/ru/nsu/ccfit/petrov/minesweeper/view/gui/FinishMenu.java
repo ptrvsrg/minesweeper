@@ -47,6 +47,21 @@ public class FinishMenu
             }
         });
 
+        setContentPane(createContentPane());
+        setVisible(true);
+    }
+
+    private BackgroundPanel createContentPane() {
+        BackgroundPanel contentPane = new BackgroundPanel(
+        (playerStatus == PlayerStatus.WINNER) ? WINNER_BACKGROUND_IMAGE_PATH
+                                              : LOSER_BACKGROUND_IMAGE_PATH);
+        contentPane.setLayout(new FlowLayout(FlowLayout.LEFT));
+        contentPane.add(createButtonArea());
+
+        return contentPane;
+    }
+
+    private JPanel createButtonArea() {
         JPanel buttonArea = new JPanel();
         buttonArea.setPreferredSize(new Dimension(getWidth() / 2, getHeight() / 2));
         buttonArea.setLayout(new GridLayout(3, 1));
