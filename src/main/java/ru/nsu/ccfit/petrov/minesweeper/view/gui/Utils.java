@@ -5,6 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Utils {
+    private static final String EXIT_CONFIRM_TITLE = "Confirmation";
+    private static final String EXIT_CONFIRM_MESSAGE = "Are you sure?";
+
     private Utils() {
         throw new IllegalStateException("Utility class");
     }
