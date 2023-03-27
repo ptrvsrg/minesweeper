@@ -4,8 +4,12 @@ import java.util.Scanner;
 import ru.nsu.ccfit.petrov.minesweeper.model.Level;
 import ru.nsu.ccfit.petrov.minesweeper.model.Model;
 
+/**
+ * The type {@code FinishMenu} is class that describe the start menu in text mode.
+ *
+ * @author ptrvsrg
+ */
 public class StartMenu {
-
     private static final String HELLO_MESSAGE = "\n"
         + "███╗░░░███╗██╗███╗░░██╗███████╗░██████╗░██╗░░░░░░░██╗███████╗███████╗██████╗░███████╗██████╗░\n"
         + "████╗░████║██║████╗░██║██╔════╝██╔════╝░██║░░██╗░░██║██╔════╝██╔════╝██╔══██╗██╔════╝██╔══██╗\n"
@@ -19,6 +23,9 @@ public class StartMenu {
         + "\n\t3 - expert";
     private static final String EXIT_MESSAGE = "To exit the game enter \"exit\"";
 
+    /**
+     * Instantiates a new StartMenu.
+     */
     public StartMenu() {
         System.out.println(HELLO_MESSAGE);
         System.out.println(EXIT_MESSAGE);
