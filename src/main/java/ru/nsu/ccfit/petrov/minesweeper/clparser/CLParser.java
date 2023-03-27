@@ -2,10 +2,22 @@ package ru.nsu.ccfit.petrov.minesweeper.clparser;
 
 import org.apache.commons.cli.*;
 
+/**
+ * The type {@code ClParser} is class for parsing command line argument
+ *
+ * @author ptrvsrg
+ */
 public class CLParser
 {
     private CommandLine commandLine;
 
+    /**
+     * Parses command line arguments.
+     *
+     * @param args command line args
+     * @return {@code true} - arguments successfully parsed, {@code false} - help option found, help printed
+     * @throws ParseException parse exception
+     */
     public boolean parse(String[] args)
         throws ParseException {
         // Add available options
@@ -43,6 +55,11 @@ public class CLParser
         return true;
     }
 
+    /**
+     * Gets value of {@code ui-mode} option
+     *
+     * @return UI mode name
+     */
     public String getUIMode() {
         return commandLine.getOptionValue("ui-mode");
     }
