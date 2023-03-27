@@ -8,12 +8,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * The type {@code ScoreRating} is util class for work with CSV file with game records.
+ *
+ * @author ptrvsrg
+ */
 public class ScoreRating {
 
     private static final String SCORE_FILE = "/scores.csv";
@@ -22,6 +26,12 @@ public class ScoreRating {
         throw new IllegalStateException("Utility class");
     }
 
+    /**
+     * Gets sorting scores from CSV file.
+     *
+     * @return sorting set of scores
+     * @throws IllegalArgumentException incorrect file format
+     */
     public static SortedSet<Score> getScores() {
         File scoreFile = new File(getScoreFile());
         if (!scoreFile.exists()) {
@@ -51,6 +61,11 @@ public class ScoreRating {
         return processedScores;
     }
 
+    /**
+     * Saves score to CSV file.
+     *
+     * @param score score
+     */
     public static void saveScore(Score score) {
         File scoreFile = new File(getScoreFile());
         try {
