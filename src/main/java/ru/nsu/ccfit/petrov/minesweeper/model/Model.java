@@ -112,6 +112,7 @@ public class Model {
             --markedCellCount;
         }
 
+        // Send notification to listeners
         if (oldCellView != field.getCellView(y, x)) {
             propertyChangeSupport.firePropertyChange(MARKED_CELL_VIEW_PROPERTY, null,
                                                      new Point(x, y));
@@ -134,6 +135,7 @@ public class Model {
                 ++openedCellCount;
             }
 
+            // Send notification to listeners
             propertyChangeSupport.firePropertyChange(OPENED_CELL_VIEW_PROPERTY, null,
                                                      new Point(x, y));
         }
@@ -142,10 +144,12 @@ public class Model {
             openedCellCount == field.getHeight() * field.getWidth() - field.getMineCount();
         boolean isOpenedMine = field.isMine(y, x) && field.getCellView(y, x) == CellView.OPENED;
         if (!isGameOver && (isOpenedMine || areAllCellsOpened)) {
-                isGameOver = true;
-                openAllMines();
-                propertyChangeSupport.firePropertyChange(IS_WINNER_PROPERTY, null,
-                                                         areAllCellsOpened);
+            isGameOver = true;
+            openAllMines();
+
+            // Send notification to listeners
+            propertyChangeSupport.firePropertyChange(IS_WINNER_PROPERTY, null,
+                                                     areAllCellsOpened);
         }
 
         if (!field.isMine(y, x) && !field.areThereMinesAround(y, x)) {
@@ -158,6 +162,7 @@ public class Model {
             for (int j = -1; j <= 1; ++j) {
                 boolean isXWithinBoundaries = (x + j >= 0) && (x + j < field.getWidth());
                 boolean isYWithinBoundaries = (y + i >= 0) && (y + i < field.getHeight());
+
                 if (isXWithinBoundaries && isYWithinBoundaries && !field.isMine(y + i, x + j)
                     && field.getCellView(y + i, x + j) == CellView.CLOSED) {
                     if (i == 0 && j == 0) {
@@ -180,9 +185,14 @@ public class Model {
     }
 
     /**
-     * Add property change listener.
+     * Add a PropertyChangeListener to the listener list.
+     * The listener is registered for all properties.
+     * The same listener object may be added more than once, and will be called
+     * as many times as it is added.
+     * If {@code listener} is null, no exception is thrown and no action
+     * is taken.
      *
-     * @param listener the property change listener
+     * @param listener  The PropertyChangeListener to be added
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);

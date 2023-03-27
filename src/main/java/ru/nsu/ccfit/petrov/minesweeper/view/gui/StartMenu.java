@@ -41,6 +41,7 @@ public class StartMenu
             /**
              * Invoked when a window is in the process of being closed. The
              * close operation can be overridden at this point.
+             * In this case, it causes the exit confirmation window to be drawn.
              *
              * @param e the event to be processed
              */
@@ -76,9 +77,9 @@ public class StartMenu
     private MenuButton createLevelButton(String levelText, Level level) {
         MenuButton levelButton = new MenuButton(levelText);
         levelButton.addActionListener(new ActionListener() {
-
             /**
              * Invoked when an action occurs.
+             * In this case, it closes all windows and creates a new game space.
              *
              * @param e the event to be processed
              */

@@ -39,7 +39,6 @@ import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.CellButton;
 public class GameSpace
     extends JFrame
     implements PropertyChangeListener {
-
     private static final String TITLE = "Minesweeper";
     private static final String MINE_ICON_PATH = "/mine.png";
     private static final String FLAG_ICON_PATH = "/flag.png";
@@ -104,6 +103,7 @@ public class GameSpace
             /**
              * Invoked when a window is in the process of being closed. The
              * close operation can be overridden at this point.
+             * In this case, it causes the exit confirmation window to be drawn.
              *
              * @param e the event to be processed
              */
@@ -147,6 +147,7 @@ public class GameSpace
         newGameButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
+             * In this case, it closes all windows and creates a new start menu frame.
              *
              * @param e the event to be processed
              */
@@ -175,6 +176,7 @@ public class GameSpace
                 cells[i][j].addMouseListener(new MouseAdapter() {
                     /**
                      * Invoked when a mouse button has been pressed on a component.
+                     * In this case, pressing the left button opens the cell, pressing the right button marks the cell.
                      *
                      * @param e the event to be processed
                      */

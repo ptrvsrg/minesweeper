@@ -61,6 +61,7 @@ public class FinishMenu
             /**
              * Invoked when a window is in the process of being closed. The
              * close operation can be overridden at this point.
+             * In this case, it causes the exit confirmation window to be drawn.
              *
              * @param e the event to be processed
              */
@@ -102,6 +103,7 @@ public class FinishMenu
         newGameButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
+             * In this case, it closes all windows and creates a new start menu frame.
              *
              * @param e the event to be processed
              */
@@ -136,6 +138,7 @@ public class FinishMenu
         saveScoreButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
+             * In this case, it creates a window for entering the player's name and saves the result to the results table.
              *
              * @param e the event to be processed
              */
@@ -155,6 +158,7 @@ public class FinishMenu
         aboutButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
+             * In this case, it creates a help window with information about the application.
              *
              * @param e the event to be processed
              */
