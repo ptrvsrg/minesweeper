@@ -15,7 +15,7 @@ public class Observable {
     private ArrayList<Observer> observers = null;
 
     /**
-     * Add observer.
+     * Adds observer.
      *
      * @param observer the observer
      */
@@ -28,7 +28,7 @@ public class Observable {
     }
 
     /**
-     * Remove observer.
+     * Removes observer.
      *
      * @param observer the observer
      */
@@ -41,7 +41,7 @@ public class Observable {
     }
 
     /**
-     * Notify observers.
+     * Notifies observers.
      *
      * @param context the context
      */
