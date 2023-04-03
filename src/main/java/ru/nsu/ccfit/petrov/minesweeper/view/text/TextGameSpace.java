@@ -4,10 +4,9 @@ import java.awt.Point;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Scanner;
-import ru.nsu.ccfit.petrov.minesweeper.model.Model;
+import ru.nsu.ccfit.petrov.minesweeper.controller.Controller;
 import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
 import ru.nsu.ccfit.petrov.minesweeper.view.text.components.CellSymbol;
-import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
 /**
  * The type {@code GameSpace} is class that describe the game space in text mode.
@@ -21,25 +20,22 @@ public class GameSpace
             + "\n\to <x> <y> - open cell (x, y)"
             + "\n\tm <x> <y> - mark cell (x, y)"
             + "\n\texit - exit the game\n";
+    private final Controller controller;
     private final Scanner scanner;
-    private final Model model;
-    private final Stopwatch stopwatch;
     private final CellSymbol[][] cells;
-    private boolean isGameRuning = true;
-    private PlayerStatus playerStatus;
+    private boolean isGameRunning = true;
 
     /**
      * Instantiates a new GameSpace.
      *
-     * @param scanner the scanner
-     * @param model   the model
+     * @param controller the controller
+     * @param scanner    the scanner
      */
-    public GameSpace(Scanner scanner, Model model) {
+    public GameSpace(Controller controller, Scanner scanner) {
+        this.controller = controller;
         this.scanner = scanner;
-        this.model = model;
-        this.stopwatch = new Stopwatch();
 
-        cells = new CellSymbol[model.getHeight()][model.getWidth()];
+        cells = new CellSymbol[controller.getHeight()][controller.getWidth()];
         initCells();
 
         model.addPropertyChangeListener(this);
@@ -50,15 +46,18 @@ public class GameSpace
     }
 
     private void initCells() {
-        for (int i = 0; i < model.getHeight(); ++i) {
-            for (int j = 0; j < model.getWidth(); ++j) {
+        for (int i = 0; i < controller.getHeight(); ++i) {
+            for (int j = 0; j < controller.getWidth(); ++j) {
                 cells[i][j] = new CellSymbol();
             }
         }
     }
 
     private void processCommand() {
-        while (isGameRuning) {
+        System.out.println(AVAILABLE_GAME_COMMAND_MESSAGE);
+        controller.runStopwatch();
+
+        while (isGameRunning) {
             printField();
             System.out.print("> ");
             String command = scanner.nextLine().trim();
@@ -86,7 +85,7 @@ public class GameSpace
         }
 
         printField();
-        new FinishMenu(scanner, playerStatus, stopwatch.getSecond());
+        new TextFinishMenu(controller, scanner);
     }
 
     private void openCell(String[] commandArgs) {
@@ -98,7 +97,7 @@ public class GameSpace
         try {
             int x = Integer.parseInt(commandArgs[1]);
             int y = Integer.parseInt(commandArgs[2]);
-            model.openCell(y, x);
+            controller.openCell(y, x);
         } catch (IllegalArgumentException e) {
             System.out.println("Incorrect command parameters");
         }
@@ -113,7 +112,7 @@ public class GameSpace
         try {
             int x = Integer.parseInt(commandArgs[1]);
             int y = Integer.parseInt(commandArgs[2]);
-            model.markCell(y, x);
+            controller.markCell(y, x);
         } catch (IllegalArgumentException e) {
             System.out.println("Incorrect command parameters");
         }
@@ -129,7 +128,7 @@ public class GameSpace
 
     private void printTopCoordinateLine() {
         System.out.printf("%3s", "");
-        for (int i = 0; i < model.getWidth(); ++i) {
+        for (int i = 0; i < controller.getWidth(); ++i) {
             System.out.printf("%3s", i);
         }
 
