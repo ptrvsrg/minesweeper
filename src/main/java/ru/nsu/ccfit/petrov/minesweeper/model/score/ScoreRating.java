@@ -32,7 +32,7 @@ public class ScoreRating {
      * @return sorting set of scores
      * @throws IllegalArgumentException incorrect file format
      */
-    public static SortedSet<Score> getScores() {
+    public static SortedSet<Score> getScoreRating() {
         File scoreFile = new File(getScoreFile());
         if (!scoreFile.exists()) {
             return Collections.emptySortedSet();
