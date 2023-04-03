@@ -29,6 +29,8 @@ public class TextGameSpace
     private final Scanner scanner;
     private final CellSymbol[][] cells;
     private boolean isGameRunning = true;
+    private String markedCellCounter;
+    private String stopwatchCounter;
 
     /**
      * Instantiates a new GameSpace.
@@ -46,7 +48,8 @@ public class TextGameSpace
         cells = new CellSymbol[controller.getHeight()][controller.getWidth()];
         initCells();
 
-        model.addPropertyChangeListener(this);
+        markedCellCounter = "0 / " + controller.getMineCount();
+        stopwatchCounter = Stopwatch.timeToString(0);
 
         processCommand();
     }
@@ -124,12 +127,12 @@ public class TextGameSpace
         }
     }
 
-    private void printTimeCounter() {
-        System.out.println("Time: " + Stopwatch.timeToString(stopwatch.getSecond()));
+    private void printStopwatchCounter() {
+        System.out.println("Time: " + stopwatchCounter);
     }
 
     private void printMarkedCellCounter() {
-        System.out.println("Marked mine: " + model.getMarkedCellCount() + "/" + model.getMineCount());
+        System.out.println("Marked mine: " + markedCellCounter);
     }
 
     private void printTopCoordinateLine() {
@@ -142,7 +145,7 @@ public class TextGameSpace
     }
 
     private void printField() {
-        printTimeCounter();
+        printStopwatchCounter();
         printMarkedCellCounter();
         printTopCoordinateLine();
 
