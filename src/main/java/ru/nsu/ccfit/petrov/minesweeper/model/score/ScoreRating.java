@@ -76,7 +76,7 @@ public class ScoreRating {
 
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(scoreFile, true))) {
             csvWriter.writeNext(
-                new String[]{score.getPlayerName(), Integer.toString(score.getTime())});
+                new String[]{score.getPlayerName(), Integer.toString(score.getGameTime())});
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
