@@ -1,11 +1,9 @@
 package ru.nsu.ccfit.petrov.minesweeper.view.text;
 
+import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.SortedSet;
+import ru.nsu.ccfit.petrov.minesweeper.controller.Controller;
 import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
-import ru.nsu.ccfit.petrov.minesweeper.model.score.Score;
-import ru.nsu.ccfit.petrov.minesweeper.model.score.ScoreRating;
-import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
 
 /**
  * The type {@code FinishMenu} is class that describe the finish menu in text mode.
@@ -42,21 +40,18 @@ public class TextFinishMenu {
             + "░░╚██╔╝░░██║░░██║██║░░░██║   ░░████╔═████║░██║░░██║██║╚████║\n"
             + "░░░██║░░░╚█████╔╝╚██████╔╝   ░░╚██╔╝░╚██╔╝░╚█████╔╝██║░╚███║\n"
             + "░░░╚═╝░░░░╚════╝░░╚═════╝░   ░░░╚═╝░░░╚═╝░░░╚════╝░╚═╝░░╚══╝\n";
+    private final Controller controller;
     private final Scanner scanner;
-    private final PlayerStatus playerStatus;
-    private final int time;
 
     /**
      * Instantiates a new FinishMenu.
      *
-     * @param scanner      the scanner
-     * @param playerStatus the player status
-     * @param time         the game time
+     * @param controller the controller
+     * @param scanner    the scanner
      */
-    public TextFinishMenu(Scanner scanner, PlayerStatus playerStatus, int time) {
+    public TextFinishMenu(Controller controller, Scanner scanner) {
+        this.controller = controller;
         this.scanner = scanner;
-        this.playerStatus = playerStatus;
-        this.time = time;
 
         printPlayerStatus();
         printAvailableCommands();
@@ -64,12 +59,12 @@ public class TextFinishMenu {
     }
 
     private void printPlayerStatus() {
-        System.out.println((playerStatus == PlayerStatus.WINNER) ? WINNER_MESSAGE : LOSER_MESSAGE);
+        System.out.println(controller.getIsWinner() ? WINNER_MESSAGE : LOSER_MESSAGE);
     }
 
     private void printAvailableCommands() {
-        System.out.println((playerStatus == PlayerStatus.WINNER) ? WINNER_AVAILABLE_MENU_COMMAND_MESSAGE
-                                                                 : LOSER_AVAILABLE_MENU_COMMAND_MESSAGE);
+        System.out.println(controller.getIsWinner() ? WINNER_AVAILABLE_MENU_COMMAND_MESSAGE
+                                                    : LOSER_AVAILABLE_MENU_COMMAND_MESSAGE);
     }
 
     private void processCommand() {
@@ -93,10 +88,9 @@ public class TextFinishMenu {
                 case "exit":
                     System.exit(0);
                     break;
-                case "save_score":
-                {
-                    if (playerStatus == PlayerStatus.WINNER) {
-                        saveScore(scanner);
+                case "save_score": {
+                    if (controller.getIsWinner()) {
+                        saveScore();
                         break;
                     }
                 }
@@ -108,21 +102,19 @@ public class TextFinishMenu {
     }
 
     private void showScores() {
-        SortedSet<Score> scores = ScoreRating.getScores();
-
         System.out.printf("| %20s | %20s |%n", "PLAYER NAME", "TIME");
 
-        for (Score score : scores) {
-            System.out.printf("| %20s | %20s |%n", score.getPlayerName(),
-                              Stopwatch.timeToString(score.getTime()));
+        for (Entry<String, Integer> score : controller.getScoreRating()) {
+            System.out.printf("| %20s | %20s |%n", score.getKey(),
+                              Stopwatch.timeToString(score.getValue()));
         }
     }
 
-    private void saveScore(Scanner scanner) {
+    private void saveScore() {
         System.out.println("Enter player name:");
         System.out.print("> ");
         String playerName = scanner.nextLine().trim();
-        ScoreRating.saveScore(new Score(playerName, time));
+        controller.saveScore(playerName);
     }
 
     private void showAbout() {
