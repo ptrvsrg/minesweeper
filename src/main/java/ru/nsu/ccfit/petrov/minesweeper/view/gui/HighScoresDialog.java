@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.petrov.minesweeper.view.gui;
 
 import java.awt.Font;
-import java.util.SortedSet;
+import java.util.Map.Entry;
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -9,8 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import ru.nsu.ccfit.petrov.minesweeper.model.score.Score;
-import ru.nsu.ccfit.petrov.minesweeper.model.score.ScoreRating;
+import ru.nsu.ccfit.petrov.minesweeper.controller.Controller;
 import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
 
 /**
@@ -23,14 +22,17 @@ public class HighScoresDialog
     private static final String TITLE = "High Scores";
     private static final int FONT_SIZE = 20;
     private static final int BORDER_INSET = 10;
+    private final Controller controller;
 
     /**
      * Instantiates a new HighScoresDialog.
      *
-     * @param owner the owner
+     * @param owner      the owner
+     * @param controller the controller
      */
-    public HighScoresDialog(JFrame owner) {
+    public HighScoresDialog(JFrame owner, Controller controller) {
         super(owner, true);
+        this.controller = controller;
 
         setTitle(TITLE);
         setSize(400, 500);
@@ -44,10 +46,9 @@ public class HighScoresDialog
         textArea.setLayout(new BoxLayout(textArea, BoxLayout.Y_AXIS));
         textArea.setBorder(new EmptyBorder(BORDER_INSET, BORDER_INSET, BORDER_INSET, BORDER_INSET));
 
-        SortedSet<Score> scores = ScoreRating.getScores();
-        for (Score score : scores) {
+        for (Entry<String, Integer> score : controller.getScoreRating()) {
             JLabel scoreLine = new JLabel(
-                score.getPlayerName() + " - " + Stopwatch.timeToString(score.getTime()) + "\n");
+                score.getKey() + " - " + Stopwatch.timeToString(score.getValue()) + "\n");
             scoreLine.setFont(new Font(Font.DIALOG, Font.BOLD, FONT_SIZE));
             textArea.add(scoreLine);
         }
