@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
-import ru.nsu.ccfit.petrov.minesweeper.view.gui.StartMenu;
+import ru.nsu.ccfit.petrov.minesweeper.view.gui.GUIStartMenu;
 
 /**
  * The type {@code ContentPane} is class that describes the background of the frame.
@@ -22,7 +22,7 @@ public class BackgroundPanel
      */
     public BackgroundPanel(String backgroundImagePath) {
         this.backgroundImage = Toolkit.getDefaultToolkit()
-                                      .getImage(StartMenu.class.getResource(backgroundImagePath));
+                                      .getImage(GUIStartMenu.class.getResource(backgroundImagePath));
     }
 
     /**
