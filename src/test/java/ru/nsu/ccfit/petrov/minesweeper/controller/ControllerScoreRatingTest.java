@@ -1,7 +1,8 @@
 package ru.nsu.ccfit.petrov.minesweeper.controller;
 
 import java.util.AbstractMap.SimpleEntry;
-import lombok.var;
+import java.util.List;
+import java.util.Map.Entry;
 import org.testng.annotations.Test;
 
 public class ControllerScoreRatingTest
@@ -9,10 +10,14 @@ public class ControllerScoreRatingTest
 
     @Test(description = "Check saving and getting score")
     public void checkSaveAndGetScore() {
+        // prepare
         String playerName = "player";
         controller.saveScore(playerName);
-        var scores = controller.getScoreRating();
+        List<Entry<String, Integer>> scores = controller.getScoreRating();
 
-        assertTrue(scores.contains(new SimpleEntry<>(playerName, 0)));
+        // do
+        boolean isContained = scores.contains(new SimpleEntry<>(playerName, 0));
+
+        assertThat(isContained).isTrue();
     }
 }

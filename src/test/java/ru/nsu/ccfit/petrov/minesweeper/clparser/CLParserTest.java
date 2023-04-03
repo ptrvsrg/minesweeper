@@ -1,17 +1,17 @@
 package ru.nsu.ccfit.petrov.minesweeper.clparser;
 
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.assertj.core.api.Assertions;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CLParserTest
-    extends Assert {
+    extends Assertions {
 
     private CLParser clParser;
 
-    @BeforeMethod
-    public void setUp() {
+    @BeforeClass
+    public void beforeClass() {
         clParser = new CLParser();
     }
 
@@ -57,7 +57,11 @@ public class CLParserTest
 
     @Test(dataProvider = "Create args and return value", description = "Check return value")
     public void checkReturnValue(String[] args, boolean returnValue) {
-        assertEquals(clParser.parse(args), returnValue);
+        // do
+        boolean actual = clParser.parse(args);
+
+        // check
+        assertThat(actual).isEqualTo(returnValue);
     }
 
     @DataProvider(name = "Create args and option value")
@@ -101,8 +105,11 @@ public class CLParserTest
 
     @Test(dataProvider = "Create args and option value", description = "Check option value")
     public void checkOptionValue(String[] args, String optionValue) {
+        // do
         clParser.parse(args);
         String actual = clParser.getUIMode();
-        assertEquals(actual, optionValue);
+
+        // check
+        assertThat(actual).isEqualTo(optionValue);
     }
 }

@@ -1,8 +1,8 @@
 package ru.nsu.ccfit.petrov.minesweeper.controller;
 
-import org.testng.Assert;
+import org.assertj.core.api.Assertions;
 
 public class ControllerTest
-    extends Assert {
+    extends Assertions {
     protected Controller controller = new Controller();
 }

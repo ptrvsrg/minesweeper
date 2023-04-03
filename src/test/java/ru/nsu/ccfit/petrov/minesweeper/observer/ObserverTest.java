@@ -1,21 +1,21 @@
 package ru.nsu.ccfit.petrov.minesweeper.observer;
 
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.assertj.core.api.Assertions;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.nsu.ccfit.petrov.minesweeper.observer.context.Context;
 
 public class ObserverTest
-    extends Assert {
+    extends Assertions {
     private Observable observable;
 
-    @BeforeMethod
-    public void setUp() {
+    @BeforeClass
+    public void beforeClass() {
         observable = new Observable();
     }
 
-    @Test(description = "check method \"notify\"")
-    void checkNotify() {
+    @Test(description = "Check notify with listener")
+    void checkNotifyWithListener() {
         // prepare
         final int[] messageCount = {0};
         Observer observer = new Observer() {
@@ -25,16 +25,32 @@ public class ObserverTest
             }
         };
         observable.addObserver(observer);
-        // do
-        observable.notifyObservers(new Context() {});
-        // check
-        assertEquals(messageCount[0], 1);
 
-        // prepare
-        observable.removeObserver(observer);
         // do
         observable.notifyObservers(new Context() {});
+
         // check
-        assertEquals(messageCount[0], 1);
+        assertThat(messageCount[0]).isEqualTo(1);
+
+        // restore
+        observable.removeObserver(observer);
+    }
+
+    @Test(description = "Check notify without listener")
+    void checkNotifyWithoutListener() {
+        // prepare
+        final int[] messageCount = {0};
+        Observer observer = new Observer() {
+            @Override
+            public void update(Context context) {
+                ++messageCount[0];
+            }
+        };
+
+        // do
+        observable.notifyObservers(new Context() {});
+
+        // check
+        assertThat(messageCount[0]).isZero();
     }
 }

@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.petrov.minesweeper.observer;
 
-import org.testng.Assert;
+import org.assertj.core.api.Assertions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.nsu.ccfit.petrov.minesweeper.observer.context.Context;
@@ -10,7 +10,7 @@ import ru.nsu.ccfit.petrov.minesweeper.observer.context.OpenedCellContext;
 import ru.nsu.ccfit.petrov.minesweeper.observer.context.StopwatchContext;
 
 public class ContextTest
-    extends Assert {
+    extends Assertions {
     private Observable observable;
 
     @BeforeClass
@@ -18,7 +18,7 @@ public class ContextTest
         observable = new Observable();
     }
 
-    @Test(description = "check sending game over context")
+    @Test(description = "Check sending game over context")
     void checkGameOverContext() {
         // prepare
         boolean isWinner = true;
@@ -26,8 +26,12 @@ public class ContextTest
             // check
             @Override
             public void update(Context context) {
-                assertTrue(context instanceof GameOverContext);
-                assertEquals(((GameOverContext) context).isWinner(), isWinner);
+                // check
+                assertThat(context).isInstanceOf(GameOverContext.class);
+
+                // do
+                boolean actualIsWinner = ((GameOverContext) context).isWinner();
+                assertThat(actualIsWinner).isEqualTo(isWinner);
             }
         };
         observable.addObserver(observer);
@@ -39,7 +43,7 @@ public class ContextTest
         observable.removeObserver(observer);
     }
 
-    @Test(description = "check sending cell mark context")
+    @Test(description = "Check sending cell mark context")
     void checkMarkedCellContext() {
         // prepare
         int x = 2;
@@ -50,11 +54,20 @@ public class ContextTest
             // check
             @Override
             public void update(Context context) {
-                assertTrue(context instanceof MarkedCellContext);
-                assertEquals(((MarkedCellContext) context).getX(), x);
-                assertEquals(((MarkedCellContext) context).getY(), y);
-                assertEquals(((MarkedCellContext) context).getMarkedCellCount(), markedCellCount);
-                assertEquals(((MarkedCellContext) context).isMarked(), isMarked);
+                // check
+                assertThat(context).isInstanceOf(MarkedCellContext.class);
+
+                // do
+                int actualX = ((MarkedCellContext) context).getX();
+                int actualY = ((MarkedCellContext) context).getY();
+                int actualMarkedCellCount = ((MarkedCellContext) context).getMarkedCellCount();
+                boolean actualIsMarked = ((MarkedCellContext) context).isMarked();
+
+                // check
+                assertThat(actualX).isEqualTo(x);
+                assertThat(actualY).isEqualTo(y);
+                assertThat(actualMarkedCellCount).isEqualTo(markedCellCount);
+                assertThat(actualIsMarked).isEqualTo(isMarked);
             }
         };
         observable.addObserver(observer);
@@ -66,7 +79,7 @@ public class ContextTest
         observable.removeObserver(observer);
     }
 
-    @Test(description = "check sending cell open context")
+    @Test(description = "Check sending cell open context")
     void checkOpenedCellContext() {
         // prepare
         int x = 2;
@@ -77,11 +90,20 @@ public class ContextTest
             // check
             @Override
             public void update(Context context) {
-                assertTrue(context instanceof OpenedCellContext);
-                assertEquals(((OpenedCellContext) context).getX(), x);
-                assertEquals(((OpenedCellContext) context).getY(), y);
-                assertEquals(((OpenedCellContext) context).getMineAroundCount(), mineAroundCount);
-                assertEquals(((OpenedCellContext) context).isMine(), isMine);
+                // check
+                assertThat(context).isInstanceOf(OpenedCellContext.class);
+
+                // do
+                int actualX = ((OpenedCellContext) context).getX();
+                int actualY = ((OpenedCellContext) context).getY();
+                int actualMineAroundCount = ((OpenedCellContext) context).getMineAroundCount();
+                boolean actualIsMine = ((OpenedCellContext) context).isMine();
+
+                // check
+                assertThat(actualX).isEqualTo(x);
+                assertThat(actualY).isEqualTo(y);
+                assertThat(actualMineAroundCount).isEqualTo(mineAroundCount);
+                assertThat(actualIsMine).isEqualTo(isMine);
             }
         };
         observable.addObserver(observer);
@@ -93,7 +115,7 @@ public class ContextTest
         observable.removeObserver(observer);
     }
 
-    @Test(description = "check sending stopwatch context")
+    @Test(description = "Check sending stopwatch context")
     void checkStopwatchContext() {
         // prepare
         int second = 236;
@@ -101,8 +123,13 @@ public class ContextTest
             // check
             @Override
             public void update(Context context) {
-                assertTrue(context instanceof StopwatchContext);
-                assertEquals(((StopwatchContext) context).getSecond(), second);
+                // check
+                assertThat(context).isInstanceOf(StopwatchContext.class);
+
+                // do
+                int actualSecond = ((StopwatchContext) context).getSecond();
+
+                assertThat(actualSecond).isEqualTo(second);
             }
         };
         observable.addObserver(observer);

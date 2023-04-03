@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.petrov.minesweeper.controller;
 
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.DataProvider;
@@ -15,44 +16,37 @@ public class ControllerModelTest
     private static final int HEIGHT = 9;
     private static final int WIDTH = 9;
     private static final int MINE_COUNT = 10;
-    private Context context;
 
     @DataProvider(name = "Create unsupported methods when model is not set")
     private Object[][] createUnsupportedMethodsWhenModelIsNotSet() {
-        return new Object[][]{new Object[]{new ThrowingRunnable() {
+        return new Object[][]{new Object[]{new ThrowingCallable() {
             @Override
-            public void run()
-                throws Throwable {
+            public void call() {
                 controller.getHeight();
             }
-        }}, new Object[]{new ThrowingRunnable() {
+        }}, new Object[]{new ThrowingCallable() {
             @Override
-            public void run()
-                throws Throwable {
+            public void call() {
                 controller.getWidth();
             }
-        }}, new Object[]{new ThrowingRunnable() {
+        }}, new Object[]{new ThrowingCallable() {
             @Override
-            public void run()
-                throws Throwable {
+            public void call() {
                 controller.getMineCount();
             }
-        }}, new Object[]{new ThrowingRunnable() {
+        }}, new Object[]{new ThrowingCallable() {
             @Override
-            public void run()
-                throws Throwable {
+            public void call() {
                 controller.markCell(1, 1);
             }
-        }}, new Object[]{new ThrowingRunnable() {
+        }}, new Object[]{new ThrowingCallable() {
             @Override
-            public void run()
-                throws Throwable {
+            public void call() {
                 controller.openCell(1, 1);
             }
-        }}, new Object[]{new ThrowingRunnable() {
+        }}, new Object[]{new ThrowingCallable() {
             @Override
-            public void run()
-                throws Throwable {
+            public void call() {
                 controller.addModelObserver(null);
             }
         }}};
@@ -61,8 +55,8 @@ public class ControllerModelTest
     @Test(description = "Check exceptions when model is not set",
           dataProvider = "Create unsupported methods when model is not set",
           groups = "Model is not set")
-    public void checkExceptionWhenModelIsNotSet(ThrowingRunnable method) {
-        assertThrows(UnsupportedOperationException.class, method);
+    public void checkExceptionWhenModelIsNotSet(ThrowingCallable method) {
+        assertThatThrownBy(method).isInstanceOf(UnsupportedOperationException.class);
     }
 
     @BeforeGroups("Model is set")
@@ -77,17 +71,20 @@ public class ControllerModelTest
 
     @Test(description = "Check height", groups = "Model is set")
     public void checkHeight() {
-        assertEquals(controller.getHeight(), HEIGHT);
+        int actual = controller.getHeight();
+        assertThat(actual).isEqualTo(HEIGHT);
     }
 
     @Test(description = "Check width", groups = "Model is set")
     public void checkWidth() {
-        assertEquals(controller.getWidth(), WIDTH);
+        int actual = controller.getWidth();
+        assertThat(actual).isEqualTo(WIDTH);
     }
 
     @Test(description = "Check mine count", groups = "Model is set")
     public void checkMineCount() {
-        assertEquals(controller.getMineCount(), MINE_COUNT);
+        int actual = controller.getMineCount();
+        assertThat(actual).isEqualTo(MINE_COUNT);
     }
 
     @Test(description = "Check marking of cell", groups = "Model is set")
@@ -101,11 +98,19 @@ public class ControllerModelTest
             @Override
             public void update(Context context) {
                 // check
-                assertTrue(context instanceof MarkedCellContext);
-                assertEquals(((MarkedCellContext) context).getX(), x);
-                assertEquals(((MarkedCellContext) context).getY(), y);
-                assertEquals(((MarkedCellContext) context).getMarkedCellCount(), markedCellCount);
-                assertEquals(((MarkedCellContext) context).isMarked(), isMarked);
+                assertThat(context).isInstanceOf(MarkedCellContext.class);
+
+                // do
+                int actualX = ((MarkedCellContext) context).getX();
+                int actualY = ((MarkedCellContext) context).getY();
+                int actualMarkedCellCount = ((MarkedCellContext) context).getMarkedCellCount();
+                boolean actualIsMarked = ((MarkedCellContext) context).isMarked();
+
+                // check
+                assertThat(actualX).isEqualTo(x);
+                assertThat(actualY).isEqualTo(y);
+                assertThat(actualMarkedCellCount).isEqualTo(markedCellCount);
+                assertThat(actualIsMarked).isEqualTo(isMarked);
             }
         };
         controller.addModelObserver(observer);
@@ -126,9 +131,15 @@ public class ControllerModelTest
             @Override
             public void update(Context context) {
                 // check
-                assertTrue(context instanceof OpenedCellContext);
-                assertEquals(((OpenedCellContext) context).getX(), x);
-                assertEquals(((OpenedCellContext) context).getY(), y);
+                assertThat(context).isInstanceOf(OpenedCellContext.class);
+
+                // do
+                int actualX = ((OpenedCellContext) context).getX();
+                int actualY = ((OpenedCellContext) context).getY();
+
+                // check
+                assertThat(actualX).isEqualTo(x);
+                assertThat(actualY).isEqualTo(y);
             }
         };
         controller.addModelObserver(observer);
