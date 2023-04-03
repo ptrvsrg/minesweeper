@@ -9,7 +9,8 @@ import ru.nsu.ccfit.petrov.minesweeper.model.Model;
  *
  * @author ptrvsrg
  */
-public class StartMenu {
+public class TextStartMenu {
+
     private static final String HELLO_MESSAGE = "\n"
         + "███╗░░░███╗██╗███╗░░██╗███████╗░██████╗░██╗░░░░░░░██╗███████╗███████╗██████╗░███████╗██████╗░\n"
         + "████╗░████║██║████╗░██║██╔════╝██╔════╝░██║░░██╗░░██║██╔════╝██╔════╝██╔══██╗██╔════╝██╔══██╗\n"
@@ -26,7 +27,8 @@ public class StartMenu {
     /**
      * Instantiates a new StartMenu.
      */
-    public StartMenu() {
+    public TextStartMenu() {
+
         System.out.println(HELLO_MESSAGE);
         System.out.println(EXIT_MESSAGE);
         processCommand();
