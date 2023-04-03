@@ -22,4 +22,10 @@
     </classes>
   </test>
 
+  <test name="Model test">
+    <classes>
+      <class name="ru.nsu.ccfit.petrov.minesweeper.model.ModelTest"/>
+    </classes>
+  </test>
+
 </suite>
