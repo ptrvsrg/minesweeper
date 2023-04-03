@@ -70,7 +70,7 @@ public class Model
     }
 
     /**
-     * Mark cell with coordinates (x, y). Also notifies listeners when model fields change.
+     * Marks cell with coordinates (x, y). Also notifies listeners when model fields change.
      *
      * @param y the y coordinate
      * @param x the x coordinate
@@ -95,7 +95,7 @@ public class Model
     }
 
     /**
-     * Open cell with coordinates (x, y). Also notifies listeners when model fields change.
+     * Opens cell with coordinates (x, y). Also notifies listeners when model fields change.
      *
      * @param y the y coordinate
      * @param x the x coordinate
