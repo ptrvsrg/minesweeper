@@ -14,7 +14,6 @@ import lombok.Getter;
  *
  * @author ptrvsrg
  */
-@Getter
 public class CellButton
     extends JButton {
     private static final Color[] NUMBER_COLORS = {Color.BLACK,
@@ -27,7 +26,9 @@ public class CellButton
                                                   Color.PINK};
     private static final Color NOT_OPENED_CELL_COLOR = Color.BLUE;
     private static final Color OPENED_CELL_COLOR = Color.WHITE;
+    @Getter
     private final int fieldX;
+    @Getter
     private final int fieldY;
     private final BufferedImage mineIcon;
     private final BufferedImage flagIcon;
