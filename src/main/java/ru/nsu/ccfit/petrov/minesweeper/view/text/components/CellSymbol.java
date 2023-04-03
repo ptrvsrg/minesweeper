@@ -38,10 +38,10 @@ public class CellSymbol {
     /**
      * Mark cell.
      */
-    public void mark() {
-        if (symbol == CLOSED_CELL_SYMBOL) {
+    public void mark(boolean isMarked) {
+        if (isMarked) {
             symbol = FLAG_SYMBOL;
-        } else if (symbol == FLAG_SYMBOL) {
+        } else {
             symbol = CLOSED_CELL_SYMBOL;
         }
     }
@@ -51,7 +51,11 @@ public class CellSymbol {
      *
      * @param mineAroundCount the mine around count
      */
-    public void open(byte mineAroundCount) {
-        symbol = CELL_SYMBOLS.get(mineAroundCount);
+    public void open(boolean isMine, byte mineAroundCount) {
+        if (isMine) {
+            symbol = MINE_SYMBOL;
+        } else {
+            symbol = CELL_SYMBOLS.get(mineAroundCount);
+        }
     }
 }
