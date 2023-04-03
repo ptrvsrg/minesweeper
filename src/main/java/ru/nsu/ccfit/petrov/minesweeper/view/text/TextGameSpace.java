@@ -3,6 +3,7 @@ package ru.nsu.ccfit.petrov.minesweeper.view.text;
 import java.util.Scanner;
 import ru.nsu.ccfit.petrov.minesweeper.controller.Controller;
 import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
+import ru.nsu.ccfit.petrov.minesweeper.observer.Observable;
 import ru.nsu.ccfit.petrov.minesweeper.observer.Observer;
 import ru.nsu.ccfit.petrov.minesweeper.observer.context.Context;
 import ru.nsu.ccfit.petrov.minesweeper.observer.context.GameOverContext;
