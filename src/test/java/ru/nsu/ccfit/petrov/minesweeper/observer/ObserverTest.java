@@ -31,12 +31,9 @@ public class ObserverTest
 
         // check
         assertThat(messageCount[0]).isEqualTo(1);
-
-        // restore
-        observable.removeObserver(observer);
     }
 
-    @Test(description = "Check notify without listener")
+    @Test(description = "Check notify without listener", dependsOnMethods = "checkNotifyWithListener")
     void checkNotifyWithoutListener() {
         // prepare
         final int[] messageCount = {0};
@@ -46,6 +43,7 @@ public class ObserverTest
                 ++messageCount[0];
             }
         };
+        observable.removeObserver(observer);
 
         // do
         observable.notifyObservers(new Context() {});
