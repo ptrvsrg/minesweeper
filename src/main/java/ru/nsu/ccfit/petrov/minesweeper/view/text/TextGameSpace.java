@@ -154,6 +154,12 @@ public class TextGameSpace
         }
     }
 
+
+    /**
+     * Handles the context of the {@link Observable Observable} object message.
+     *
+     * @param context the context
+     */
     @Override
     public void update(Context context) {
         if (context instanceof MarkedCellContext) {
