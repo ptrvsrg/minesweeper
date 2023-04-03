@@ -6,7 +6,7 @@ import java.util.Set;
 import lombok.Getter;
 
 /**
- * The type {@code Field} is class for work with field.
+ * The type {@code Field} is class for work with minefield.
  *
  * @author ptrvsrg
  */
