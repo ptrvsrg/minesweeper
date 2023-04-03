@@ -28,8 +28,10 @@ public class GUIFinishMenu
     private static final String SAVE_SCORE_TITLE = "Save Score";
     private static final String ABOUT_TITLE = "About";
     private static final String ABOUT_MESSAGE =
-        "Program \"Minesweeper v1.0\"\n" + "Designer: prtvsrg\n" + "Developer: ptrvsrg\n"
-            + "Source code: https://github.com/ptrvsrg/NSU_OOP_Java/tree/master/Task3";
+        "Program \"Minesweeper v1.0\"\n"
+        + "Designer: prtvsrg\n"
+        + "Developer: ptrvsrg\n"
+        + "Source code: https://github.com/ptrvsrg/NSU_OOP_Java/tree/master/Task3";
     private static final String PLAYER_NAME_MESSAGE = "Player Name: ";
     private static final String WINNER_TITLE = "Victory";
     private static final String LOSER_TITLE = "R.I.P";
