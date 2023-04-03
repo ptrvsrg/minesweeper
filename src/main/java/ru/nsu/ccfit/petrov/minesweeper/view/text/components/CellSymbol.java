@@ -36,7 +36,7 @@ public class CellSymbol {
     }
 
     /**
-     * Mark cell.
+     * Marks cell.
      */
     public void mark(boolean isMarked) {
         if (isMarked) {
@@ -47,7 +47,7 @@ public class CellSymbol {
     }
 
     /**
-     * Open cell.
+     * Opens cell.
      *
      * @param mineAroundCount the mine around count
      */
