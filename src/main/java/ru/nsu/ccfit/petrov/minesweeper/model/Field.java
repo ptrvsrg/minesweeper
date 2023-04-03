@@ -12,7 +12,7 @@ import lombok.Getter;
  */
 public class Field {
     private static final int MINE = -1;
-    private static final Random randomGenerator = new Random();
+    private static final Random randomizer = new Random();
     @Getter
     private final int height;
     @Getter
@@ -91,7 +91,7 @@ public class Field {
 
         int numCount = 0;
         while (count != numCount) {
-            int num = randomGenerator.nextInt(bound);
+            int num = randomizer.nextInt(bound);
 
             if (!nums.contains(num)) {
                 nums.add(num);
