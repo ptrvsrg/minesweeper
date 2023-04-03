@@ -23,23 +23,12 @@ public class Model
     /**
      * Instantiates a new Model.
      *
-     * @param level the level
-     * @throws IllegalArgumentException if level does not belong to {@link ru.nsu.ccfit.petrov.minesweeper.model.Level Level}
+     * @param height    the field height
+     * @param width     the field width
+     * @param mineCount the mine count on minefield
      */
-    public Model(Level level) {
-        switch (level) {
-            case BEGINNER:
-                field = new Field(9, 9, 10);
-                break;
-            case INTERMEDIATE:
-                field = new Field(16, 16, 40);
-                break;
-            case EXPERT:
-                field = new Field(16, 30, 99);
-                break;
-            default:
-                throw new IllegalArgumentException("Incorrect game level");
-        }
+    public Model(int height, int width, int mineCount) {
+        this.field = new Field(height, width, mineCount);
     }
 
     /**
