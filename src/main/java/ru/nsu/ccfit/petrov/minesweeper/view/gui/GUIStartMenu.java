@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import lombok.AllArgsConstructor;
 import ru.nsu.ccfit.petrov.minesweeper.controller.Controller;
 import ru.nsu.ccfit.petrov.minesweeper.controller.Level;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.BackgroundPanel;
@@ -67,22 +68,29 @@ public class GUIStartMenu
 
     private MenuButton createLevelButton(String levelText, Level level) {
         MenuButton levelButton = new MenuButton(levelText);
-        levelButton.addActionListener(new ActionListener() {
-            /**
-             * Invoked when an action occurs.
-             * In this case, it closes all windows and creates a new game space.
-             *
-             * @param e the event to be processed
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                controller.setModel(level);
-                new GUIGameSpace(controller);
-            }
-        });
+        levelButton.addActionListener(new LevelButtonListener(level));
 
         return levelButton;
+    }
+
+    @AllArgsConstructor
+    private class LevelButtonListener
+        implements ActionListener {
+
+        private Level level;
+
+        /**
+         * Invoked when an action occurs. In this case, it closes all windows and creates a new game
+         * space.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+            controller.setModel(level);
+            new GUIGameSpace(controller);
+        }
     }
 
     private class WindowClosingListener
