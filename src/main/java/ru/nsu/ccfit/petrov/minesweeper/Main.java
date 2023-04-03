@@ -1,6 +1,9 @@
 package ru.nsu.ccfit.petrov.minesweeper;
 
 import ru.nsu.ccfit.petrov.minesweeper.clparser.CLParser;
+import ru.nsu.ccfit.petrov.minesweeper.controller.Controller;
+import ru.nsu.ccfit.petrov.minesweeper.view.gui.GUIStartMenu;
+import ru.nsu.ccfit.petrov.minesweeper.view.text.TextStartMenu;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,12 +18,13 @@ public class Main {
         }
 
         try {
+            Controller controller = new Controller();
             switch (uiMode) {
                 case "GUI":
-                    new ru.nsu.ccfit.petrov.minesweeper.view.gui.StartMenu();
+                    new GUIStartMenu(controller);
                     break;
                 case "text":
-                    new ru.nsu.ccfit.petrov.minesweeper.view.text.StartMenu();
+                    new TextStartMenu(controller);
                     break;
                 default:
                     throw new IllegalArgumentException("No such UI mode found\n");
