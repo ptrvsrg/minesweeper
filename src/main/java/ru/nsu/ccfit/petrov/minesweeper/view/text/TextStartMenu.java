@@ -71,8 +71,6 @@ public class TextStartMenu {
                         System.out.println(CHOOSE_LEVEL_MESSAGE);
                 }
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 }
