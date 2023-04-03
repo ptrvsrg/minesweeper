@@ -32,7 +32,6 @@ public class TextStartMenu {
         this.controller = controller;
 
         System.out.println(HELLO_MESSAGE);
-        System.out.println(EXIT_MESSAGE);
         processCommand();
     }
 
@@ -40,6 +39,7 @@ public class TextStartMenu {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 System.out.println(CHOOSE_LEVEL_MESSAGE);
+                System.out.println(EXIT_MESSAGE);
                 System.out.print("> ");
                 String command = scanner.nextLine().trim();
 
