@@ -64,11 +64,11 @@ public class Score
              */
             @Override
             public int compare(Score o1, Score o2) {
-                if (o1.getTime() == o2.getTime()) {
+                if (o1.getGameTime() == o2.getGameTime()) {
                     return o1.getPlayerName().compareTo(o2.getPlayerName());
                 }
 
-                return Integer.compare(o1.getTime(), o2.getTime());
+                return Integer.compare(o1.getGameTime(), o2.getGameTime());
             }
         };
     }
