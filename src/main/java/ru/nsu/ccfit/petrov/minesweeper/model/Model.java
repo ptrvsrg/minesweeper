@@ -1,38 +1,24 @@
 package ru.nsu.ccfit.petrov.minesweeper.model;
 
-import java.awt.Point;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import lombok.Getter;
+import ru.nsu.ccfit.petrov.minesweeper.observer.Observable;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.GameOverContext;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.MarkedCellContext;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.OpenedCellContext;
 
 /**
  * The type {@code Model} is class for description game logic.
  *
  * @author ptrvsrg
  */
-public class Model {
+public class Model
+    extends Observable {
+
     private final Field field;
     @Getter
     private int markedCellCount = 0;
     private int openedCellCount = 0;
     private boolean isGameOver = false;
-    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-    /**
-     * The constant MARKED_CELL_VIEW_PROPERTY is constant for {@link PropertyChangeListener}.
-     */
-    public static final String MARKED_CELL_VIEW_PROPERTY = "markedCellViewProperty";
-    /**
-     * The constant OPENED_CELL_VIEW_PROPERTY is constant for {@link PropertyChangeListener}.
-     */
-    public static final String OPENED_CELL_VIEW_PROPERTY = "openedCellViewProperty";
-    /**
-     * The constant MARKED_CELL_COUNT_PROPERTY is constant for {@link PropertyChangeListener}.
-     */
-    public static final String MARKED_CELL_COUNT_PROPERTY = "markedCellCountProperty";
-    /**
-     * The constant IS_WINNER_PROPERTY is constant for {@link PropertyChangeListener}.
-     */
-    public static final String IS_WINNER_PROPERTY = "isWinnerProperty";
 
     /**
      * Instantiates a new Model.
@@ -114,10 +100,8 @@ public class Model {
 
         // Send notification to listeners
         if (oldCellView != field.getCellView(y, x)) {
-            propertyChangeSupport.firePropertyChange(MARKED_CELL_VIEW_PROPERTY, null,
-                                                     new Point(x, y));
-            propertyChangeSupport.firePropertyChange(MARKED_CELL_COUNT_PROPERTY, oldMarkedCellCount,
-                                                     markedCellCount);
+            notifyObservers(new MarkedCellContext(x, y, markedCellCount,
+                                                  field.getCellView(y, x) == CellView.MARKED));
         }
     }
 
@@ -136,8 +120,8 @@ public class Model {
             }
 
             // Send notification to listeners
-            propertyChangeSupport.firePropertyChange(OPENED_CELL_VIEW_PROPERTY, null,
-                                                     new Point(x, y));
+            notifyObservers(
+                new OpenedCellContext(x, y, field.getMineCountAround(y, x), field.isMine(y, x)));
         }
 
         boolean areAllCellsOpened =
@@ -148,8 +132,7 @@ public class Model {
             openAllMines();
 
             // Send notification to listeners
-            propertyChangeSupport.firePropertyChange(IS_WINNER_PROPERTY, null,
-                                                     areAllCellsOpened);
+            notifyObservers(new GameOverContext(areAllCellsOpened));
         }
 
         if (!field.isMine(y, x) && !field.areThereMinesAround(y, x)) {
@@ -182,19 +165,5 @@ public class Model {
                 }
             }
         }
-    }
-
-    /**
-     * Add a PropertyChangeListener to the listener list.
-     * The listener is registered for all properties.
-     * The same listener object may be added more than once, and will be called
-     * as many times as it is added.
-     * If {@code listener} is null, no exception is thrown and no action
-     * is taken.
-     *
-     * @param listener  The PropertyChangeListener to be added
-     */
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
     }
 }
