@@ -27,6 +27,8 @@ public class TextStartMenu {
 
     /**
      * Instantiates a new StartMenu.
+     *
+     * @param controller the controller
      */
     public TextStartMenu(Controller controller) {
         this.controller = controller;
