@@ -14,7 +14,7 @@ import lombok.Getter;
 public class Score
 {
     private final String playerName;
-    private final int time;
+    private final int gameTime;
 
     /**
      * Gets comparator for compare objects of type {@code Score}.
