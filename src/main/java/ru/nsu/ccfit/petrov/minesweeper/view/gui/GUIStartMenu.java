@@ -10,8 +10,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import ru.nsu.ccfit.petrov.minesweeper.model.Level;
-import ru.nsu.ccfit.petrov.minesweeper.model.Model;
+import ru.nsu.ccfit.petrov.minesweeper.controller.Controller;
+import ru.nsu.ccfit.petrov.minesweeper.controller.Level;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.BackgroundPanel;
 import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.MenuButton;
 
@@ -27,11 +27,14 @@ public class GUIStartMenu
     private static final String INTERMEDIATE_BUTTON_TEXT = "Intermediate";
     private static final String EXPERT_BUTTON_TEXT = "Expert";
     private static final String BACKGROUND_IMAGE_PATH = "/start_menu_background.png";
+    private final Controller controller;
 
     /**
      * Instantiates a new StartMenu.
      */
-    public GUIStartMenu() {
+    public GUIStartMenu(Controller controller) {
+        this.controller = controller;
+
         setTitle(TITLE);
         setSize(800, 600);
         setResizable(false);
@@ -86,6 +89,7 @@ public class GUIStartMenu
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                controller.setModel(level);
                 new GUIGameSpace(controller);
             }
         });
