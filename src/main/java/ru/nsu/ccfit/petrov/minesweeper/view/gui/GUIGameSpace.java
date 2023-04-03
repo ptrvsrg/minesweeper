@@ -225,6 +225,7 @@ public class GUIGameSpace
          */
         @Override
         public void actionPerformed(ActionEvent e) {
+            dispose();
             controller.removeModel();
             controller.stopStopwatch();
             new GUIStartMenu(controller);
