@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.petrov.minesweeper.observer;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.nsu.ccfit.petrov.minesweeper.observer.context.Context;
 import ru.nsu.ccfit.petrov.minesweeper.observer.context.GameOverContext;
@@ -13,8 +13,8 @@ public class ContextTest
     extends Assert {
     private Observable observable;
 
-    @BeforeMethod
-    public void setUp() {
+    @BeforeClass
+    public void beforeClass() {
         observable = new Observable();
     }
 
@@ -34,6 +34,9 @@ public class ContextTest
 
         // do
         observable.notifyObservers(new GameOverContext(isWinner));
+
+        // restore
+        observable.removeObserver(observer);
     }
 
     @Test(description = "check sending cell mark context")
@@ -58,6 +61,9 @@ public class ContextTest
 
         // do
         observable.notifyObservers(new MarkedCellContext(x, y, markedCellCount, isMarked));
+
+        // restore
+        observable.removeObserver(observer);
     }
 
     @Test(description = "check sending cell open context")
@@ -82,6 +88,9 @@ public class ContextTest
 
         // do
         observable.notifyObservers(new OpenedCellContext(x, y, mineAroundCount, isMine));
+
+        // restore
+        observable.removeObserver(observer);
     }
 
     @Test(description = "check sending stopwatch context")
@@ -100,5 +109,8 @@ public class ContextTest
 
         // do
         observable.notifyObservers(new StopwatchContext(second));
+
+        // restore
+        observable.removeObserver(observer);
     }
 }
