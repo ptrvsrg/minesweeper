@@ -40,19 +40,7 @@ public class GUIStartMenu
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            /**
-             * Invoked when a window is in the process of being closed. The
-             * close operation can be overridden at this point.
-             * In this case, it causes the exit confirmation window to be drawn.
-             *
-             * @param e the event to be processed
-             */
-            @Override
-            public void windowClosing(WindowEvent e) {
-                Utils.exitConfirm(StartMenu.this);
-            }
-        });
+        addWindowListener(new WindowClosingListener());
         setContentPane(createContentPane());
         setVisible(true);
     }
@@ -95,5 +83,21 @@ public class GUIStartMenu
         });
 
         return levelButton;
+    }
+
+    private class WindowClosingListener
+        extends WindowAdapter {
+
+        /**
+         * Invoked when a window is in the process of being closed. The
+         * close operation can be overridden at this point.
+         * In this case, it causes the exit confirmation window to be drawn.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void windowClosing(WindowEvent e) {
+            Utils.exitConfirm(GUIStartMenu.this);
+        }
     }
 }
