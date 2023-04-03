@@ -1,11 +1,14 @@
 package ru.nsu.ccfit.petrov.minesweeper.view.text;
 
-import java.awt.Point;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Scanner;
 import ru.nsu.ccfit.petrov.minesweeper.controller.Controller;
 import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
+import ru.nsu.ccfit.petrov.minesweeper.observer.Observer;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.Context;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.GameOverContext;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.MarkedCellContext;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.OpenedCellContext;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.StopwatchContext;
 import ru.nsu.ccfit.petrov.minesweeper.view.text.components.CellSymbol;
 
 /**
@@ -13,8 +16,9 @@ import ru.nsu.ccfit.petrov.minesweeper.view.text.components.CellSymbol;
  *
  * @author ptrvsrg
  */
-public class GameSpace
-    implements PropertyChangeListener {
+public class TextGameSpace
+    implements Observer {
+
     private static final String AVAILABLE_GAME_COMMAND_MESSAGE =
         "Available game commands:"
             + "\n\to <x> <y> - open cell (x, y)"
@@ -31,17 +35,18 @@ public class GameSpace
      * @param controller the controller
      * @param scanner    the scanner
      */
-    public GameSpace(Controller controller, Scanner scanner) {
+    public TextGameSpace(Controller controller, Scanner scanner) {
         this.controller = controller;
         this.scanner = scanner;
+
+        controller.addModelObserver(this);
+        controller.addStopwatchObserver(this);
 
         cells = new CellSymbol[controller.getHeight()][controller.getWidth()];
         initCells();
 
         model.addPropertyChangeListener(this);
 
-        System.out.println(AVAILABLE_GAME_COMMAND_MESSAGE);
-        stopwatch.run();
         processCommand();
     }
 
@@ -149,32 +154,24 @@ public class GameSpace
         }
     }
 
-    /**
-     * This method gets called when a bound property is changed.
-     *
-     * @param evt A PropertyChangeEvent object describing the event source and the property that has
-     *            changed.
-     */
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        String propertyName = evt.getPropertyName();
+    public void update(Context context) {
+        if (context instanceof MarkedCellContext) {
+            CellSymbol cellSymbol = cells[((MarkedCellContext) context).getY()][((MarkedCellContext) context).getX()];
+            cellSymbol.mark(((MarkedCellContext) context).isMarked());
 
-        switch (propertyName) {
-            case Model.MARKED_CELL_VIEW_PROPERTY:
-                Point point = (Point) evt.getNewValue();
-                cells[point.y][point.x].mark();
-                break;
-            case Model.OPENED_CELL_VIEW_PROPERTY:
-                point = (Point) evt.getNewValue();
-                cells[point.y][point.x].open(model.getMineCountAround(point.y, point.x));
-                break;
-            case Model.IS_WINNER_PROPERTY:
-                stopwatch.stop();
-                isGameRuning = false;
-                playerStatus = Boolean.TRUE.equals(evt.getNewValue()) ? PlayerStatus.WINNER : PlayerStatus.LOSER;
-                break;
-            default:
-                throw new IllegalArgumentException("Unexpected property change");
+            markedCellCounter = ((MarkedCellContext) context).getMarkedCellCount() + " / "
+                + controller.getMineCount();
+        } else if (context instanceof OpenedCellContext) {
+            CellSymbol cellSymbol = cells[((OpenedCellContext) context).getY()][((OpenedCellContext) context).getX()];
+            cellSymbol.open(((OpenedCellContext) context).isMine(),
+                            ((OpenedCellContext) context).getMineAroundCount());
+        } else if (context instanceof StopwatchContext) {
+            stopwatchCounter = Stopwatch.timeToString(((StopwatchContext) context).getSecond());
+        } else if (context instanceof GameOverContext) {
+            controller.stopStopwatch();
+            controller.setIsWinner(((GameOverContext) context).isWinner());
+            isGameRunning = false;
         }
     }
 }
