@@ -12,12 +12,12 @@ import lombok.Getter;
 public class CellSymbol {
     private static final HashMap<Byte, Character> CELL_SYMBOLS = new HashMap<>();
     private static final char FLAG_SYMBOL = 'F';
+    private static final char MINE_SYMBOL = 'X';
     private static final char CLOSED_CELL_SYMBOL = '#';
     private char symbol;
 
     static {
-        CELL_SYMBOLS.put((byte) -1, 'x');
-        CELL_SYMBOLS.put((byte) 0, '0');
+        CELL_SYMBOLS.put((byte) 0, ' ');
         CELL_SYMBOLS.put((byte) 1, '1');
         CELL_SYMBOLS.put((byte) 2, '2');
         CELL_SYMBOLS.put((byte) 3, '3');
