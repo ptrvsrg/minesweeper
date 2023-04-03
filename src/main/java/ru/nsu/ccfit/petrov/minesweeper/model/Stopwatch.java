@@ -2,6 +2,7 @@ package ru.nsu.ccfit.petrov.minesweeper.model;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import lombok.Getter;
 import ru.nsu.ccfit.petrov.minesweeper.observer.Observable;
 import ru.nsu.ccfit.petrov.minesweeper.observer.context.StopwatchContext;
 
@@ -14,11 +15,8 @@ import ru.nsu.ccfit.petrov.minesweeper.observer.context.StopwatchContext;
 public class Stopwatch
     extends Observable
 {
-    /**
-     * The constant STOPWATCH_PROPERTY is constant for {@link PropertyChangeListener}.
-     */
-    public static final String STOPWATCH_PROPERTY = "stopwatchProperty";
-    private int second = -1;
+    @Getter
+    private int second = 0;
     private boolean isRunning = false;
     private Timer timer;
 
