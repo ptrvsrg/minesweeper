@@ -59,11 +59,11 @@ public class TextFinishMenu {
     }
 
     private void printPlayerStatus() {
-        System.out.println(controller.getIsWinner() ? WINNER_MESSAGE : LOSER_MESSAGE);
+        System.out.println(Boolean.TRUE.equals(controller.getIsWinner()) ? WINNER_MESSAGE : LOSER_MESSAGE);
     }
 
     private void printAvailableCommands() {
-        System.out.println(controller.getIsWinner() ? WINNER_AVAILABLE_MENU_COMMAND_MESSAGE
+        System.out.println(Boolean.TRUE.equals(controller.getIsWinner()) ? WINNER_AVAILABLE_MENU_COMMAND_MESSAGE
                                                     : LOSER_AVAILABLE_MENU_COMMAND_MESSAGE);
     }
 
@@ -89,7 +89,7 @@ public class TextFinishMenu {
                     System.exit(0);
                     break;
                 case "save_score": {
-                    if (controller.getIsWinner()) {
+                    if (Boolean.TRUE.equals(controller.getIsWinner())) {
                         saveScore();
                         break;
                     }
