@@ -12,7 +12,7 @@ import ru.nsu.ccfit.petrov.minesweeper.view.PlayerStatus;
  *
  * @author ptrvsrg
  */
-public class FinishMenu {
+public class TextFinishMenu {
     private static final String WINNER_AVAILABLE_MENU_COMMAND_MESSAGE = "Available menu commands:"
             + "\n\tnew_game - start a new game"
             + "\n\thigh_scores - show high score table"
@@ -53,7 +53,7 @@ public class FinishMenu {
      * @param playerStatus the player status
      * @param time         the game time
      */
-    public FinishMenu(Scanner scanner, PlayerStatus playerStatus, int time) {
+    public TextFinishMenu(Scanner scanner, PlayerStatus playerStatus, int time) {
         this.scanner = scanner;
         this.playerStatus = playerStatus;
         this.time = time;
