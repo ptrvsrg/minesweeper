@@ -1,8 +1,8 @@
 package ru.nsu.ccfit.petrov.minesweeper.view.text;
 
 import java.util.Scanner;
-import ru.nsu.ccfit.petrov.minesweeper.model.Level;
-import ru.nsu.ccfit.petrov.minesweeper.model.Model;
+import ru.nsu.ccfit.petrov.minesweeper.controller.Controller;
+import ru.nsu.ccfit.petrov.minesweeper.controller.Level;
 
 /**
  * The type {@code FinishMenu} is class that describe the start menu in text mode.
@@ -23,11 +23,13 @@ public class TextStartMenu {
         + "\n\t2 - intermediate"
         + "\n\t3 - expert";
     private static final String EXIT_MESSAGE = "To exit the game enter \"exit\"";
+    private final Controller controller;
 
     /**
      * Instantiates a new StartMenu.
      */
-    public TextStartMenu() {
+    public TextStartMenu(Controller controller) {
+        this.controller = controller;
 
         System.out.println(HELLO_MESSAGE);
         System.out.println(EXIT_MESSAGE);
@@ -48,15 +50,18 @@ public class TextStartMenu {
                 switch (command) {
                     case "1":
                     case "beginner":
-                        new GameSpace(scanner, new Model(Level.BEGINNER));
+                        controller.setModel(Level.BEGINNER);
+                        new TextGameSpace(controller, scanner);
                         break;
                     case "2":
                     case "intermediate":
-                        new GameSpace(scanner, new Model(Level.INTERMEDIATE));
+                        controller.setModel(Level.INTERMEDIATE);
+                        new TextGameSpace(controller, scanner);
                         break;
                     case "3":
                     case "expert":
-                        new GameSpace(scanner, new Model(Level.EXPERT));
+                        controller.setModel(Level.EXPERT);
+                        new TextGameSpace(controller, scanner);
                         break;
                     case "exit":
                         System.exit(0);
