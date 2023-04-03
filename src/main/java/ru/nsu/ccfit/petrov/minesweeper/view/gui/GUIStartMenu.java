@@ -23,6 +23,7 @@ import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.MenuButton;
  */
 public class GUIStartMenu
     extends JFrame {
+
     private static final String TITLE = "Welcome \"Minesweeper\"";
     private static final String BEGINNER_BUTTON_TEXT = "Beginner";
     private static final String INTERMEDIATE_BUTTON_TEXT = "Intermediate";
@@ -32,6 +33,8 @@ public class GUIStartMenu
 
     /**
      * Instantiates a new StartMenu.
+     *
+     * @param controller the controller
      */
     public GUIStartMenu(Controller controller) {
         this.controller = controller;
@@ -97,9 +100,9 @@ public class GUIStartMenu
         extends WindowAdapter {
 
         /**
-         * Invoked when a window is in the process of being closed. The
-         * close operation can be overridden at this point.
-         * In this case, it causes the exit confirmation window to be drawn.
+         * Invoked when a window is in the process of being closed. The close operation can be
+         * overridden at this point. In this case, it causes the exit confirmation window to be
+         * drawn.
          *
          * @param e the event to be processed
          */
