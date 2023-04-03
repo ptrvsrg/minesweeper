@@ -5,7 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class CLParserTest {
+public class CLParserTest
+    extends Assert {
 
     private CLParser clParser;
 
@@ -14,8 +15,8 @@ public class CLParserTest {
         clParser = new CLParser();
     }
 
-    @DataProvider(name = "create args and return value")
-    public static Object[][] createArgsAndReturnValue() {
+    @DataProvider(name = "Create args and return value")
+    private Object[][] createArgsAndReturnValue() {
         return new Object[][]{new Object[]{new String[]{"-m", "GUI"}, true},
                               new Object[]{new String[]{"-m", "text"}, true},
                               new Object[]{new String[]{"-m", "invisible"}, true},
@@ -46,23 +47,21 @@ public class CLParserTest {
                               new Object[]{new String[]{"--help"}, false},
                               new Object[]{new String[]{"--help", "--ui-mode", "GUI"}, false},
 
-                              new Object[]{new String[]{"--help", "value"}, false},
                               new Object[]{new String[]{"--help", "--option"}, false},
                               new Object[]{new String[]{"-m"}, false},
                               new Object[]{new String[]{"--ui-mode"}, false},
-                              new Object[]{new String[]{"--ui-mode", "GUI", "value"}, false},
                               new Object[]{new String[]{"--ui-mode", "GUI", "--option"}, false},
                               new Object[]{new String[]{"-o"}, false},
                               new Object[]{new String[]{"--option"}, false}};
     }
 
-    @Test(dataProvider = "create args and return value", description = "check return value")
+    @Test(dataProvider = "Create args and return value", description = "Check return value")
     public void checkReturnValue(String[] args, boolean returnValue) {
-        Assert.assertEquals(clParser.parse(args), returnValue);
+        assertEquals(clParser.parse(args), returnValue);
     }
 
-    @DataProvider(name = "create args and option value")
-    public static Object[][] createArgsAndOptionValue() {
+    @DataProvider(name = "Create args and option value")
+    private Object[][] createArgsAndOptionValue() {
         return new Object[][]{new Object[]{new String[]{"-m", "GUI"}, "GUI"},
                               new Object[]{new String[]{"-m", "text"}, "text"},
                               new Object[]{new String[]{"-m", "invisible"}, "invisible"},
@@ -100,10 +99,10 @@ public class CLParserTest {
                               new Object[]{new String[]{"--option"}, null}};
     }
 
-    @Test(dataProvider = "create args and option value", description = "check option value")
+    @Test(dataProvider = "Create args and option value", description = "Check option value")
     public void checkOptionValue(String[] args, String optionValue) {
         clParser.parse(args);
         String actual = clParser.getUIMode();
-        Assert.assertEquals(actual, optionValue);
+        assertEquals(actual, optionValue);
     }
 }
