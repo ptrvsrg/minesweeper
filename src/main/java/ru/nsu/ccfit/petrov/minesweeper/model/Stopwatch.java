@@ -1,9 +1,9 @@
 package ru.nsu.ccfit.petrov.minesweeper.model;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.Timer;
 import java.util.TimerTask;
+import ru.nsu.ccfit.petrov.minesweeper.observer.Observable;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.StopwatchContext;
 
 
 /**
@@ -12,6 +12,7 @@ import java.util.TimerTask;
  * @author ptrvsrg
  */
 public class Stopwatch
+    extends Observable
 {
     /**
      * The constant STOPWATCH_PROPERTY is constant for {@link PropertyChangeListener}.
@@ -20,7 +21,6 @@ public class Stopwatch
     private int second = -1;
     private boolean isRunning = false;
     private Timer timer;
-    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
     private class StopwatchTask
         extends TimerTask {
@@ -31,7 +31,7 @@ public class Stopwatch
         @Override
         public void run() {
             ++second;
-            propertyChangeSupport.firePropertyChange(STOPWATCH_PROPERTY, second - 1, second);
+            notifyObservers(new StopwatchContext(second));
         }
     }
 
@@ -57,29 +57,6 @@ public class Stopwatch
         isRunning = false;
         timer.cancel();
         timer.purge();
-    }
-
-    /**
-     * Gets the elapsed time between calls to {@link Stopwatch#run()} and {@link Stopwatch#stop()}
-     *
-     * @return the second
-     */
-    public int getSecond() {
-        return Math.max(second, 0);
-    }
-
-    /**
-     * Add a PropertyChangeListener to the listener list.
-     * The listener is registered for all properties.
-     * The same listener object may be added more than once, and will be called
-     * as many times as it is added.
-     * If {@code listener} is null, no exception is thrown and no action
-     * is taken.
-     *
-     * @param listener  The PropertyChangeListener to be added
-     */
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
     }
 
     /**
