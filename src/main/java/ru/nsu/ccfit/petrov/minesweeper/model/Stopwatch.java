@@ -40,6 +40,7 @@ public class Stopwatch
         if (isRunning)
             return;
 
+        second = -1;
         isRunning = true;
         timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new StopwatchTask(), 0, 1000);
