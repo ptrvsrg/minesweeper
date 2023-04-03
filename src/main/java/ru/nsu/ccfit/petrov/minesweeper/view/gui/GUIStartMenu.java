@@ -20,7 +20,7 @@ import ru.nsu.ccfit.petrov.minesweeper.view.gui.components.MenuButton;
  *
  * @author ptrvsrg
  */
-public class StartMenu
+public class GUIStartMenu
     extends JFrame {
     private static final String TITLE = "Welcome \"Minesweeper\"";
     private static final String BEGINNER_BUTTON_TEXT = "Beginner";
@@ -31,7 +31,7 @@ public class StartMenu
     /**
      * Instantiates a new StartMenu.
      */
-    public StartMenu() {
+    public GUIStartMenu() {
         setTitle(TITLE);
         setSize(800, 600);
         setResizable(false);
@@ -86,7 +86,7 @@ public class StartMenu
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new GameSpace(new Model(level));
+                new GUIGameSpace(controller);
             }
         });
 
