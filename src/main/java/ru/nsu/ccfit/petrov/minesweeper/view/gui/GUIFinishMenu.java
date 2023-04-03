@@ -49,7 +49,7 @@ public class GUIFinishMenu
         super(owner, true);
         this.controller = controller;
 
-        setTitle((controller.getIsWinner()) ? WINNER_TITLE : LOSER_TITLE);
+        setTitle(Boolean.TRUE.equals((controller.getIsWinner())) ? WINNER_TITLE : LOSER_TITLE);
         setSize(800, 600);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -62,7 +62,7 @@ public class GUIFinishMenu
 
     private BackgroundPanel createContentPane() {
         BackgroundPanel contentPane = new BackgroundPanel(
-            (controller.getIsWinner()) ? WINNER_BACKGROUND_IMAGE_PATH
+            Boolean.TRUE.equals((controller.getIsWinner())) ? WINNER_BACKGROUND_IMAGE_PATH
                                        : LOSER_BACKGROUND_IMAGE_PATH);
         contentPane.setLayout(new FlowLayout(FlowLayout.LEFT));
         contentPane.add(createButtonArea());
@@ -78,7 +78,7 @@ public class GUIFinishMenu
         buttonArea.add(createMenuButton(NEW_GAME_TITLE, new NewGameButtonListener()));
         buttonArea.add(createMenuButton(HIGH_SCORES_TITLE, new HighScoreButtonListener()));
 
-        if (controller.getIsWinner()) {
+        if (Boolean.TRUE.equals(controller.getIsWinner())) {
             buttonArea.add(createMenuButton(SAVE_SCORE_TITLE, new SaveScoreButtonListener()));
         }
 
