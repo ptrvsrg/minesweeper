@@ -55,8 +55,8 @@ public class CellButton
     /**
      * Mark cell.
      */
-    public void mark() {
-        if (getIcon() == null) {
+    public void mark(boolean isMarked) {
+        if (isMarked) {
             Dimension size = getSize();
             setIcon(new ImageIcon(
                 flagIcon.getScaledInstance(3 * size.width / 4, 3 * size.height / 4,
@@ -71,9 +71,9 @@ public class CellButton
      *
      * @param mineAroundCount the mine around count
      */
-    public void open(byte mineAroundCount) {
+    public void open(boolean isMine, byte mineAroundCount) {
         setBackground(OPENED_CELL_COLOR);
-        if (mineAroundCount == -1) {
+        if (isMine) {
             Dimension size = getSize();
             setIcon(new ImageIcon(
                 mineIcon.getScaledInstance(3 * size.width / 4, 3 * size.height / 4,
