@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.petrov.minesweeper.model;
+package ru.nsu.ccfit.petrov.minesweeper.controller;
 
 /**
  * The type {@code Level} is enum for definition game level.
