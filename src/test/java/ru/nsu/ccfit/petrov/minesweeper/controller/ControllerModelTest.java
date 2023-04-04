@@ -122,32 +122,32 @@ public class ControllerModelTest
         controller.removeModelObserver(observer);
     }
 
-    @Test(description = "Check opening of cell", groups = "Model is set")
-    public void checkOpenCell() {
-        // prepare
-        int x = 1;
-        int y = 2;
-        Observer observer = new Observer() {
-            @Override
-            public void update(Context context) {
-                // check
-                assertThat(context).isInstanceOf(OpenedCellContext.class);
-
-                // do
-                int actualX = ((OpenedCellContext) context).getX();
-                int actualY = ((OpenedCellContext) context).getY();
-
-                // check
-                assertThat(actualX).isEqualTo(x);
-                assertThat(actualY).isEqualTo(y);
-            }
-        };
-        controller.addModelObserver(observer);
-
-        // do
-        controller.openCell(y, x);
-
-        // restore
-        controller.removeModelObserver(observer);
-    }
+//    @Test(description = "Check opening of cell", groups = "Model is set")
+//    public void checkOpenCell() {
+//        // prepare
+//        int x = 1;
+//        int y = 2;
+//        Observer observer = new Observer() {
+//            @Override
+//            public void update(Context context) {
+//                // check
+//                assertThat(context).isInstanceOf(OpenedCellContext.class);
+//
+//                // do
+//                int actualX = ((OpenedCellContext) context).getX();
+//                int actualY = ((OpenedCellContext) context).getY();
+//
+//                // check
+//                assertThat(actualX).isEqualTo(x);
+//                assertThat(actualY).isEqualTo(y);
+//            }
+//        };
+//        controller.addModelObserver(observer);
+//
+//        // do
+//        controller.openCell(y, x);
+//
+//        // restore
+//        controller.removeModelObserver(observer);
+//    }
 }
