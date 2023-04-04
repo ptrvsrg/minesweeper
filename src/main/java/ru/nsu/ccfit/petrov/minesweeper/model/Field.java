@@ -116,6 +116,7 @@ public class Field
      * @param x the x coordinate
      */
     public void markCell(int y, int x) {
+        checkCoordinates(y, x);
         CellView oldCellView = cellViewMatrix[y][x];
         int oldMarkedCellCount = markedCellCount;
 
@@ -141,6 +142,7 @@ public class Field
      * @param x the x coordinate
      */
     public void openCell(int y, int x) {
+        checkCoordinates(y, x);
         CellView oldCellView = cellViewMatrix[y][x];
         if (oldCellView == CellView.CLOSED) {
             cellViewMatrix[y][x] = CellView.OPENED;
@@ -193,6 +195,12 @@ public class Field
                     openCell(i, j);
                 }
             }
+        }
+    }
+
+    private void checkCoordinates(int y, int x) {
+        if (y < 0 || y >= height || x < 0 || x >= width) {
+            throw new IllegalArgumentException("Incorrect coordinates");
         }
     }
 }
