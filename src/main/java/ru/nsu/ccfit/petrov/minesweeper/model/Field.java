@@ -4,13 +4,18 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import lombok.Getter;
+import ru.nsu.ccfit.petrov.minesweeper.observer.Observable;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.GameOverContext;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.MarkedCellContext;
+import ru.nsu.ccfit.petrov.minesweeper.observer.context.OpenedCellContext;
 
 /**
  * The type {@code Field} is class for work with minefield.
  *
  * @author ptrvsrg
  */
-public class Field {
+public class Field
+    extends Observable {
     private static final int MINE = -1;
     private static final Random randomizer = new Random();
     @Getter
@@ -22,6 +27,11 @@ public class Field {
     private final CellView[][] cellViewMatrix;
     private final byte[][] mineMatrix;  // -1 is mine
                                         // another number is the number of mines around
+
+    @Getter
+    private int markedCellCount = 0;
+    private int openedCellCount = 0;
+    private boolean isGameOver = false;
 
     /**
      * Instantiates a new Field.
@@ -69,14 +79,14 @@ public class Field {
     }
 
     private void placeMine(int y, int x) {
-        mineMatrix[y][x] = -1;
+        mineMatrix[y][x] = MINE;
 
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 boolean isCentralPoint = (i == 0 && j == 0);
                 boolean isXWithinBoundaries = (x + j >= 0) && (x + j < width);
                 boolean isYWithinBoundaries = (y + i >= 0) && (y + i < height);
-                if (!isCentralPoint && isXWithinBoundaries && isYWithinBoundaries && !isMine(y + i, x + j)) {
+                if (!isCentralPoint && isXWithinBoundaries && isYWithinBoundaries && mineMatrix[y + i][x + j] != MINE) {
                     ++mineMatrix[y + i][x + j];
                 }
             }
@@ -100,69 +110,89 @@ public class Field {
     }
 
     /**
-     * Gets view of cell with coordinates (x, y).
+     * Marks cell with coordinates (x, y). Also notifies listeners when model fields change.
      *
-     * @param y the y coordinates
-     * @param x the x coordinates
-     * @return the cell view
-     * @throws IllegalArgumentException if coordinates are outside field
+     * @param y the y coordinate
+     * @param x the x coordinate
      */
-    public CellView getCellView(int y, int x) {
-        checkCoordinates(y, x);
-        return cellViewMatrix[y][x];
-    }
+    public void markCell(int y, int x) {
+        CellView oldCellView = cellViewMatrix[y][x];
+        int oldMarkedCellCount = markedCellCount;
 
-    /**
-     * Sets view of cell with coordinates (x, y).
-     *
-     * @param y the y coordinates
-     * @param x the x coordinates
-     * @throws IllegalArgumentException if coordinates are outside field
-     */
-    public void setCellView(int y, int x, CellView cellView) {
-        checkCoordinates(y, x);
-        cellViewMatrix[y][x] = cellView;
-    }
+        if (oldCellView == CellView.CLOSED && oldMarkedCellCount < mineCount) {
+            cellViewMatrix[y][x] = CellView.MARKED;
+            ++markedCellCount;
+        } else if (oldCellView == CellView.MARKED) {
+            cellViewMatrix[y][x] = CellView.CLOSED;
+            --markedCellCount;
+        }
 
-    /**
-     * Gets mine count around cell with coordinates (x, y).
-     *
-     * @param y the y coordinates
-     * @param x the x coordinates
-     * @throws IllegalArgumentException if coordinates are outside field
-     */
-    public byte getMineCountAround(int y, int x) {
-        checkCoordinates(y, x);
-        return mineMatrix[y][x];
-    }
-
-    private void checkCoordinates(int y, int x) {
-        if (y < 0 || y >= height || x < 0 || x >= width) {
-            throw new IllegalArgumentException("Incorrect coordinates");
+        // Send notification to listeners
+        if (oldCellView != cellViewMatrix[y][x]) {
+            notifyObservers(new MarkedCellContext(x, y, markedCellCount,
+                                                  cellViewMatrix[y][x] == CellView.MARKED));
         }
     }
 
     /**
-     * Is cell with coordinates (x, y) mine?
+     * Opens cell with coordinates (x, y). Also notifies listeners when model fields change.
      *
-     * @param y the y coordinates
-     * @param x the x coordinates
-     * @return {@code true} - cell with coordinates (x, y) is mine,
-     * {@code false} - cell with coordinates (x, y) is not mine
+     * @param y the y coordinate
+     * @param x the x coordinate
      */
-    public boolean isMine(int y, int x) {
-        return getMineCountAround(y, x) == MINE;
+    public void openCell(int y, int x) {
+        CellView oldCellView = cellViewMatrix[y][x];
+        if (oldCellView == CellView.CLOSED) {
+            cellViewMatrix[y][x] = CellView.OPENED;
+            if (mineMatrix[y][x] != MINE) {
+                ++openedCellCount;
+            }
+
+            // Send notification to listeners
+            notifyObservers(
+                new OpenedCellContext(x, y, mineMatrix[y][x], mineMatrix[y][x] == MINE));
+        }
+
+        boolean areAllCellsOpened =
+            openedCellCount == height * width - mineCount;
+        boolean isOpenedMine = (mineMatrix[y][x] == MINE) && (cellViewMatrix[y][x] == CellView.OPENED);
+        if (!isGameOver && (isOpenedMine || areAllCellsOpened)) {
+            isGameOver = true;
+            openAllMines();
+
+            // Send notification to listeners
+            notifyObservers(new GameOverContext(areAllCellsOpened));
+        }
+
+        if (mineMatrix[y][x] == 0) {
+            openNeighbourCells(y, x);
+        }
     }
 
-    /**
-     * Are there mines around cell with coordinates (x, y)?
-     *
-     * @param y the y coordinates
-     * @param x the x coordinates
-     * @return {@code true} - there are mines around,
-     * {@code false} - there are no mines around
-     */
-    public boolean areThereMinesAround(int y, int x) {
-        return getMineCountAround(y, x) > 0;
+    private void openNeighbourCells(int y, int x) {
+        for (int i = -1; i <= 1; ++i) {
+            for (int j = -1; j <= 1; ++j) {
+                boolean isXWithinBoundaries = (x + j >= 0) && (x + j < width);
+                boolean isYWithinBoundaries = (y + i >= 0) && (y + i < height);
+
+                if (isXWithinBoundaries && isYWithinBoundaries && mineMatrix[y + i][x + j] != MINE
+                    && cellViewMatrix[y + i][x + j] == CellView.CLOSED) {
+                    if (i == 0 && j == 0) {
+                        continue;
+                    }
+                    openCell(y + i, x + j);
+                }
+            }
+        }
+    }
+
+    private void openAllMines() {
+        for (int i = 0; i < height; ++i) {
+            for (int j = 0; j < width; ++j) {
+                if (mineMatrix[i][j] == MINE && cellViewMatrix[i][j] != CellView.OPENED) {
+                    openCell(i, j);
+                }
+            }
+        }
     }
 }

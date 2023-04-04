@@ -91,7 +91,7 @@ public class GUIStartMenu
         @Override
         public void actionPerformed(ActionEvent e) {
             dispose();
-            controller.setModel(level);
+            controller.setField(level);
             new GUIGameSpace(controller);
         }
     }

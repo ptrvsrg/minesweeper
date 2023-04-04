@@ -52,17 +52,17 @@ public class TextStartMenu {
                 switch (command) {
                     case "1":
                     case "beginner":
-                        controller.setModel(Level.BEGINNER);
+                        controller.setField(Level.BEGINNER);
                         new TextGameSpace(controller, scanner);
                         break;
                     case "2":
                     case "intermediate":
-                        controller.setModel(Level.INTERMEDIATE);
+                        controller.setField(Level.INTERMEDIATE);
                         new TextGameSpace(controller, scanner);
                         break;
                     case "3":
                     case "expert":
-                        controller.setModel(Level.EXPERT);
+                        controller.setField(Level.EXPERT);
                         new TextGameSpace(controller, scanner);
                         break;
                     case "exit":

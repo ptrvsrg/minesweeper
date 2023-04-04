@@ -106,7 +106,7 @@ public class GUIFinishMenu
         public void actionPerformed(ActionEvent e) {
             dispose();
             getOwner().dispose();
-            controller.removeModel();
+            controller.removeField();
             new GUIStartMenu(controller);
         }
     }

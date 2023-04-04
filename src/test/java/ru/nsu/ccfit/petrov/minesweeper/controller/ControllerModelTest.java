@@ -61,12 +61,12 @@ public class ControllerModelTest
 
     @BeforeGroups("Model is set")
     public void setModel() {
-        controller.setModel(Level.BEGINNER);
+        controller.setField(Level.BEGINNER);
     }
 
     @AfterGroups("Model is set")
     public void removeModel() {
-        controller.removeModel();
+        controller.removeField();
     }
 
     @Test(description = "Check height", groups = "Model is set")

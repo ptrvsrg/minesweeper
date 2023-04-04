@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nsu.ccfit.petrov.minesweeper.model.Model;
+import ru.nsu.ccfit.petrov.minesweeper.model.Field;
 import ru.nsu.ccfit.petrov.minesweeper.model.Stopwatch;
 import ru.nsu.ccfit.petrov.minesweeper.model.score.Score;
 import ru.nsu.ccfit.petrov.minesweeper.model.score.ScoreRating;
@@ -20,7 +20,7 @@ import ru.nsu.ccfit.petrov.minesweeper.observer.Observer;
  */
 public class Controller {
 
-    private Model model = null;
+    private Field field = null;
     private final Stopwatch stopwatch = new Stopwatch();
     @Getter
     @Setter
@@ -31,16 +31,16 @@ public class Controller {
      *
      * @param level the level
      */
-    public void setModel(Level level) {
+    public void setField(Level level) {
         switch (level) {
             case BEGINNER:
-                this.model = new Model(9, 9, 10);
+                this.field = new Field(9, 9, 10);
                 break;
             case INTERMEDIATE:
-                this.model = new Model(16, 16, 40);
+                this.field = new Field(16, 16, 40);
                 break;
             case EXPERT:
-                this.model = new Model(16, 30, 99);
+                this.field = new Field(16, 30, 99);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + level);
@@ -50,8 +50,8 @@ public class Controller {
     /**
      * Removes model.
      */
-    public void removeModel() {
-        model = null;
+    public void removeField() {
+        field = null;
     }
 
     /**
@@ -60,11 +60,11 @@ public class Controller {
      * @return the field height
      */
     public int getHeight() {
-        if (model == null) {
+        if (field == null) {
             throw new UnsupportedOperationException();
         }
 
-        return model.getHeight();
+        return field.getHeight();
     }
 
     /**
@@ -73,11 +73,11 @@ public class Controller {
      * @return the field width
      */
     public int getWidth() {
-        if (model == null) {
+        if (field == null) {
             throw new UnsupportedOperationException();
         }
 
-        return model.getWidth();
+        return field.getWidth();
     }
 
     /**
@@ -86,11 +86,11 @@ public class Controller {
      * @return the mine count in the field
      */
     public int getMineCount() {
-        if (model == null) {
+        if (field == null) {
             throw new UnsupportedOperationException();
         }
 
-        return model.getMineCount();
+        return field.getMineCount();
     }
 
     /**
@@ -100,11 +100,11 @@ public class Controller {
      * @param x the x coordinate
      */
     public void openCell(int y, int x) {
-        if (model == null) {
+        if (field == null) {
             throw new UnsupportedOperationException();
         }
 
-        model.openCell(y, x);
+        field.openCell(y, x);
     }
 
     /**
@@ -114,11 +114,11 @@ public class Controller {
      * @param x the x coordinates
      */
     public void markCell(int y, int x) {
-        if (model == null) {
+        if (field == null) {
             throw new UnsupportedOperationException();
         }
 
-        model.markCell(y, x);
+        field.markCell(y, x);
     }
 
     /**
@@ -127,11 +127,11 @@ public class Controller {
      * @param observer the observer
      */
     public void addModelObserver(Observer observer) {
-        if (model == null) {
+        if (field == null) {
             throw new UnsupportedOperationException();
         }
 
-        model.addObserver(observer);
+        field.addObserver(observer);
     }
 
     /**
@@ -140,11 +140,11 @@ public class Controller {
      * @param observer the observer
      */
     public void removeModelObserver(Observer observer) {
-        if (model == null) {
+        if (field == null) {
             throw new UnsupportedOperationException();
         }
 
-        model.removeObserver(observer);
+        field.removeObserver(observer);
     }
 
     /**
