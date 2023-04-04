@@ -22,9 +22,9 @@
     </classes>
   </test>
 
-  <test name="Model test">
+  <test name="Field test">
     <classes>
-      <class name="ru.nsu.ccfit.petrov.minesweeper.model.ModelTest"/>
+      <class name="ru.nsu.ccfit.petrov.minesweeper.model.FieldTest"/>
     </classes>
   </test>
 
