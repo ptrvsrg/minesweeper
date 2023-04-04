@@ -67,7 +67,6 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-
                     <archive>
                         <manifest>
                             <mainClass>ru.nsu.ccfit.petrov.minesweeper.Main</mainClass>
