@@ -14,7 +14,8 @@ public class ObserverTest
         observable = new Observable();
     }
 
-    @Test(description = "Check notify with listener")
+    @Test(description = "Check notify with listener",
+          groups = "Observer tests")
     void checkNotifyWithListener() {
         // prepare
         final int[] messageCount = {0};
@@ -33,7 +34,9 @@ public class ObserverTest
         assertThat(messageCount[0]).isEqualTo(1);
     }
 
-    @Test(description = "Check notify without listener", dependsOnMethods = "checkNotifyWithListener")
+    @Test(description = "Check notify without listener",
+          dependsOnMethods = "checkNotifyWithListener",
+          groups = "Observer tests")
     void checkNotifyWithoutListener() {
         // prepare
         final int[] messageCount = {0};
