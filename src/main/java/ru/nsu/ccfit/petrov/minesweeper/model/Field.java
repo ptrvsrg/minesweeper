@@ -157,19 +157,23 @@ public class Field
                 new OpenedCellContext(x, y, mineMatrix[y][x], mineMatrix[y][x] == MINE));
         }
 
-        boolean areAllCellsOpened =
-            openedCellCount == height * width - mineCount;
-        boolean isOpenedMine = (mineMatrix[y][x] == MINE) && (cellViewMatrix[y][x] == CellView.OPENED);
+        checkGameOver(y, x);
+
+        if (mineMatrix[y][x] == 0) {
+            openNeighbourCells(y, x);
+        }
+    }
+
+    private void checkGameOver(int y, int x) {
+        boolean areAllCellsOpened = openedCellCount == height * width - mineCount;
+        boolean isOpenedMine =
+            (mineMatrix[y][x] == MINE) && (cellViewMatrix[y][x] == CellView.OPENED);
         if (!isGameOver && (isOpenedMine || areAllCellsOpened)) {
             isGameOver = true;
             openAllMines();
 
             // Send notification to listeners
             notifyObservers(new GameOverContext(areAllCellsOpened));
-        }
-
-        if (mineMatrix[y][x] == 0) {
-            openNeighbourCells(y, x);
         }
     }
 
