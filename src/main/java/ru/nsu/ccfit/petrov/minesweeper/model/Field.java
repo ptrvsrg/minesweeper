@@ -87,7 +87,8 @@ public class Field
                 boolean isCentralPoint = (i == 0 && j == 0);
                 boolean isXWithinBoundaries = (x + j >= 0) && (x + j < width);
                 boolean isYWithinBoundaries = (y + i >= 0) && (y + i < height);
-                if (!isCentralPoint && isXWithinBoundaries && isYWithinBoundaries && mineMatrix[y + i][x + j] != MINE) {
+                if (!isCentralPoint && isXWithinBoundaries && isYWithinBoundaries
+                    && mineMatrix[y + i][x + j] != MINE) {
                     ++mineMatrix[y + i][x + j];
                 }
             }
