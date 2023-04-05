@@ -43,7 +43,7 @@ public class Field
      * @throws IllegalArgumentException if height, width or mine count have negative value
      */
     public Field(int height, int width, int mineCount) {
-        if (height < 0 || width < 0) {
+        if (height <= 0 || width <= 0) {
             throw new IllegalArgumentException("Incorrect size");
         }
         if (mineCount < 0) {
