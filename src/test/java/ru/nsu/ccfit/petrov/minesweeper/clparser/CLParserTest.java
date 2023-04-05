@@ -55,7 +55,9 @@ public class CLParserTest
                               new Object[]{new String[]{"--option"}, false}};
     }
 
-    @Test(dataProvider = "Create args and return value", description = "Check return value")
+    @Test(description = "Check return value",
+          dataProvider = "Create args and return value",
+          groups = "Command line parser tests")
     public void checkReturnValue(String[] args, boolean returnValue) {
         // do
         boolean actual = clParser.parse(args);
@@ -103,7 +105,9 @@ public class CLParserTest
                               new Object[]{new String[]{"--option"}, null}};
     }
 
-    @Test(dataProvider = "Create args and option value", description = "Check option value")
+    @Test(description = "Check option value",
+          dataProvider = "Create args and option value",
+          groups = "Command line parser tests")
     public void checkOptionValue(String[] args, String optionValue) {
         // do
         clParser.parse(args);
