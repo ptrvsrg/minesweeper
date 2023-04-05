@@ -52,7 +52,7 @@ public class Field
 
         this.height = height;
         this.width = width;
-        this.mineCount = Math.min(mineCount, height * width);
+        this.mineCount = Math.min(mineCount, height * width - 1);
         this.cellViewMatrix = new CellView[height][width];
         this.mineMatrix = new byte[height][width];
 
