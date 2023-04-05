@@ -8,7 +8,8 @@ import org.testng.annotations.Test;
 public class ControllerScoreRatingTest
     extends ControllerTest {
 
-    @Test(description = "Check saving and getting score")
+    @Test(description = "Check saving and getting score",
+          groups = "Controller tests")
     public void checkSaveAndGetScore() {
         // prepare
         String playerName = "player";
@@ -18,6 +19,7 @@ public class ControllerScoreRatingTest
         // do
         boolean isContained = scores.contains(new SimpleEntry<>(playerName, 0));
 
+        // check
         assertThat(isContained).isTrue();
     }
 }
