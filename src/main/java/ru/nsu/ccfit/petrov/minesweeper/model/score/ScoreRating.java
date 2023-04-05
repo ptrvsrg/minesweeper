@@ -20,7 +20,7 @@ import java.util.TreeSet;
  */
 public class ScoreRating {
 
-    private static final String SCORE_FILE = "/scores.csv";
+    public static final String SCORE_FILE = "/scores.csv";
 
     private ScoreRating() {
         throw new IllegalStateException("Utility class");
