@@ -16,6 +16,7 @@ import ru.nsu.ccfit.petrov.minesweeper.observer.context.OpenedCellContext;
  */
 public class Field
     extends Observable {
+
     private static final int MINE = -1;
     private static final Random randomizer = new Random();
     @Getter
@@ -40,7 +41,7 @@ public class Field
      * @param width     the width
      * @param mineCount the mine count
      * @throws IllegalArgumentException if height, width or mine count have negative value
-     * */
+     */
     public Field(int height, int width, int mineCount) {
         if (height < 0 || width < 0) {
             throw new IllegalArgumentException("Incorrect size");
