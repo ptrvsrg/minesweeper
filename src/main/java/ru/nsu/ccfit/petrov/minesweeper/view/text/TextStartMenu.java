@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.petrov.minesweeper.view.text;
 
 import java.util.Scanner;
+import lombok.Cleanup;
 import ru.nsu.ccfit.petrov.minesweeper.controller.Controller;
 import ru.nsu.ccfit.petrov.minesweeper.controller.Level;
 
@@ -38,40 +39,41 @@ public class TextStartMenu {
     }
 
     private void processCommand() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (true) {
-                System.out.println(CHOOSE_LEVEL_MESSAGE);
-                System.out.println(EXIT_MESSAGE);
-                System.out.print("> ");
-                String command = scanner.nextLine().trim();
+        @Cleanup
+        Scanner scanner = new Scanner(System.in);
 
-                if (command.isEmpty()) {
-                    continue;
-                }
+        while (true) {
+            System.out.println(CHOOSE_LEVEL_MESSAGE);
+            System.out.println(EXIT_MESSAGE);
+            System.out.print("> ");
+            String command = scanner.nextLine().trim();
 
-                switch (command) {
-                    case "1":
-                    case "beginner":
-                        controller.setField(Level.BEGINNER);
-                        new TextGameSpace(controller, scanner);
-                        break;
-                    case "2":
-                    case "intermediate":
-                        controller.setField(Level.INTERMEDIATE);
-                        new TextGameSpace(controller, scanner);
-                        break;
-                    case "3":
-                    case "expert":
-                        controller.setField(Level.EXPERT);
-                        new TextGameSpace(controller, scanner);
-                        break;
-                    case "exit":
-                        System.exit(0);
-                        break;
-                    default:
-                        System.out.println("Unknown command");
-                        System.out.println(CHOOSE_LEVEL_MESSAGE);
-                }
+            if (command.isEmpty()) {
+                continue;
+            }
+
+            switch (command) {
+                case "1":
+                case "beginner":
+                    controller.setField(Level.BEGINNER);
+                    new TextGameSpace(controller, scanner);
+                    break;
+                case "2":
+                case "intermediate":
+                    controller.setField(Level.INTERMEDIATE);
+                    new TextGameSpace(controller, scanner);
+                    break;
+                case "3":
+                case "expert":
+                    controller.setField(Level.EXPERT);
+                    new TextGameSpace(controller, scanner);
+                    break;
+                case "exit":
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Unknown command");
+                    System.out.println(CHOOSE_LEVEL_MESSAGE);
             }
         }
     }
