@@ -1,5 +1,7 @@
 # Задание 3.  Шаблон проектирования "MVC", графический интерфейс пользователя (GUI).
 
+[![Testing](https://github.com/ptrvsrg/minesweeper/actions/workflows/maven.yml/badge.svg)](https://github.com/ptrvsrg/minesweeper/actions/workflows/maven.yml)
+
 ## Постановка задачи
 
 Написать аналог игры `Сапер` (`Minesweeper`) из состава стандартных программ для Windows OS;
